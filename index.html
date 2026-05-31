@@ -1440,6 +1440,13 @@ footer{background:#0d1f18;padding:4rem clamp(1.5rem,5vw,5rem) 2rem;}
               </div>
             </div>
 
+            <!-- Live price display -->
+            <div class="config-section" id="livePriceSection" style="padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.07);">
+              <div class="config-label">Estimated Price</div>
+              <div id="livePriceDisplay" style="font-size:1.15rem;font-family:'Cormorant Garamond',serif;color:var(--gold);font-weight:600;"></div>
+              <div id="livePriceBreakdown" style="font-size:.72rem;color:rgba(245,241,232,.4);margin-top:.25rem;"></div>
+            </div>
+
             <!-- Nav -->
             <div class="config-section customise-nav">
               <button class="config-btn-outline" onclick="prevCover()" id="prevCoverBtn">← Back</button>
@@ -1463,22 +1470,31 @@ footer{background:#0d1f18;padding:4rem clamp(1.5rem,5vw,5rem) 2rem;}
       <!-- === STEP 3: Review === -->
       <div class="bstep" id="bstep3">
         <div style="margin-bottom:1.5rem;">
-          <div class="config-label">Your Design — review each cover before ordering</div>
+          <div class="config-label">Your Cart — all covers you've designed</div>
         </div>
         <div class="review-grid" id="reviewGrid"></div>
 
-        <div class="checkout-block">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--cream);margin-bottom:.3rem;">Ready to Order?</div>
-          <div style="font-size:.8rem;color:rgba(245,241,232,.5);margin-bottom:1rem;line-height:1.6;">Review your selections above, then checkout via WhatsApp and we'll confirm pricing and details.</div>
-          <div class="cart-form-row"><label>Your Name</label><input id="reviewName" placeholder="Full name"></div>
-          <div class="cart-form-row"><label>WhatsApp / Phone</label><input id="reviewContact" placeholder="+27 or 0..."></div>
-          <div class="cart-form-row"><label>Notes (optional)</label><textarea id="reviewNotes" placeholder="Any extra details..." style="min-height:60px;resize:vertical;"></textarea></div>
-          <button class="checkout-btn" onclick="checkoutNow()">📩 Checkout via WhatsApp</button>
+        <div id="reviewGrandTotal" style="
+          margin-top:1.2rem;
+          padding:1rem 1.4rem;
+          border:1px solid rgba(184,155,94,.3);
+          background:rgba(184,155,94,.06);
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          max-width:560px;
+        ">
+          <span style="font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,241,232,.5);">Order Total</span>
+          <span id="reviewTotalAmount" style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--gold);"></span>
+        </div>
+
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;max-width:560px;">
+          <button class="config-btn-outline" style="flex:1;min-width:160px;" onclick="addAnotherCover()">+ Add Another Cover</button>
+          <button class="config-btn-primary" style="flex:1;min-width:160px;" onclick="openCart()">View Cart &amp; Checkout</button>
         </div>
 
         <div class="review-actions">
           <button class="config-btn-outline" style="width:auto;" onclick="restartBuilder()">← Start Over</button>
-          <button class="config-btn-primary" style="width:auto;" onclick="addBuildToCart()">Add to Cart</button>
         </div>
       </div>
 
@@ -1735,7 +1751,7 @@ function launchBuilder(typeKey, action) {
   build.fullsetMode = null;
   build.queue = [];
   build.current = 0;
-  build.designs = [];
+  build.designs = [];  // only tracks current build session, cart persists separately
 
   // Update header
   const titleEl = document.getElementById('builderTitle');
@@ -1870,6 +1886,7 @@ function renderProgress() {
   if (pb) pb.disabled = build.current === 0 && build.action !== 'build';
   const nb = document.getElementById('nextCoverBtn');
   if (nb) nb.textContent = build.current === total - 1 ? 'Save & Review →' : 'Save & Next →';
+  updateLivePrice();
 }
 
 /* ==================== COLOUR SWATCH BUILDER ==================== */
@@ -1962,15 +1979,12 @@ function getBasePrice(design){
   }
 
   if(
-    type.includes("5 Wood")
+    type.includes("5 Wood") ||
+    type.includes("3 Wood") ||
+    type.includes("Fairway Wood") ||
+    type.includes("Wood")
   ){
     return PRICE_TABLE["5 Wood"][style] || 0;
-  }
-
-  if(
-    type.includes("3 Wood")
-  ){
-    return PRICE_TABLE["3 Wood"][style] || 0;
   }
 
   if(
@@ -2094,24 +2108,25 @@ function saveCurrentAndNext() {
 
   if (build.current < build.queue.length - 1) {
     build.current++;
-
     loadDraftForIndex(build.current);
-
-    // ✅ NEW: scroll to top smoothly for next club
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
+    // Save this build's designs into the persistent cart
+    build.designs.forEach(d => {
+      const item = {
+        id: 'b_' + Date.now() + '_' + Math.random().toString(36).slice(2),
+        kind: build.mode,
+        fullsetMode: build.mode === 'fullset' ? build.fullsetMode : null,
+        designs: [d],
+      };
+      const cart = loadCart();
+      cart.push(item);
+      saveCart(cart);
+    });
+    updateCartBadge();
     goToBuilderStep(3);
     renderReview();
-
-    // optional: also scroll to top on review page
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
 
@@ -2154,6 +2169,7 @@ function applyStyle(name, el) {
   applyColorsToActive();
   renderLabels();
   animateCover();
+  updateLivePrice();
 }
 
 function applyColorsToActive() {
@@ -2223,11 +2239,31 @@ function renderLabels() {
   }
 }
 
+function updateLivePrice() {
+  const el = document.getElementById('livePriceDisplay');
+  const breakdown = document.getElementById('livePriceBreakdown');
+  if (!el) return;
+  const tempDesign = {
+    coverType: build.queue?.[build.current] || '',
+    style: currentStyle,
+    number: numberText,
+    initials: initialsText
+  };
+  const base = getBasePrice(tempDesign);
+  const embr = getEmbroideryCost(tempDesign);
+  const total = base + embr;
+  el.textContent = total > 0 ? `R${total}` : '—';
+  const parts = [`Base: R${base}`];
+  if (embr > 0) parts.push(`Personalisation: +R${embr}`);
+  breakdown.textContent = parts.join(' · ');
+}
+
 function setNumber(val, el) {
   document.querySelectorAll('#numberTabs .config-tab').forEach(t => t.classList.remove('active'));
   el?.classList.add('active');
   numberText = val;
   renderLabels();
+  updateLivePrice();
 }
 function setNumberPos(pos, el) {
   document.querySelectorAll('#numberPosTabs .config-tab').forEach(t => t.classList.remove('active'));
@@ -2238,6 +2274,7 @@ function setNumberPos(pos, el) {
 function setInitials(val) {
   initialsText = (val || '').toUpperCase().slice(0,3);
   renderLabels();
+  updateLivePrice();
 }
 function setInitialsPos(pos, el) {
   document.querySelectorAll('#initialsPosTabs .config-tab').forEach(t => t.classList.remove('active'));
@@ -2250,11 +2287,13 @@ function toggleNumberExtra(cb) {
   if (cb.checked) { if (!numberText) { numberText='1'; setActiveNumberTab('1'); } }
   else { numberText = ''; }
   renderLabels();
+  updateLivePrice();
 }
 function toggleInitialsExtra(cb) {
   document.getElementById('initialsOptions').style.display = cb.checked ? 'block' : 'none';
   if (!cb.checked) { initialsText=''; const inp=document.getElementById('initialsInput'); if(inp) inp.value=''; }
   renderLabels();
+  updateLivePrice();
 }
 
 function setActivePosTab(gId, pos) {
@@ -2283,10 +2322,21 @@ function animateCover() {
 function renderReview() {
   const grid = document.getElementById('reviewGrid');
   if (!grid) return;
-  grid.innerHTML = build.designs.map((d, i) => {
+  const cart = loadCart();
+  // Flatten all designs from all cart items
+  const allDesigns = cart.flatMap(item => item.designs || []);
+  let grandTotal = 0;
+  if (!allDesigns.length) {
+    grid.innerHTML = '<div style="color:rgba(245,241,232,.5);font-size:.85rem;">No covers designed yet.</div>';
+    const totalEl = document.getElementById('reviewTotalAmount');
+    if (totalEl) totalEl.textContent = 'R0';
+    return;
+  }
+  grid.innerHTML = allDesigns.map((d, i) => {
+    grandTotal += d.totalPrice || 0;
     const parts = [];
     if (d.number)  parts.push(`No. ${d.number} (${d.numberPos}, ${d.numberColorName})`);
-    if (d.initials)parts.push(`"${d.initials}" (${d.initialsPos}, ${d.initialsColorName})`);
+    if (d.initials) parts.push(`"${d.initials}" (${d.initialsPos}, ${d.initialsColorName})`);
     const secSwatch = d.useSecondary ? `<span class="rc-swatch" title="Secondary ${d.secondaryName}" style="background:${d.secondary}"></span>` : '';
     return `<div class="review-card">
       <div class="review-card-header">
@@ -2302,50 +2352,58 @@ function renderReview() {
         <span class="rc-swatch-label">Trim</span>
         ${secSwatch}
       </div>
-<div class="rc-extras">
-  ${parts.length ? parts.join(' · ') : 'No personalisation'}
-</div>
-
-<div style="
-  margin-top:.7rem;
-  padding-top:.7rem;
-  border-top:1px solid rgba(255,255,255,.08);
-  font-size:.85rem;
-  line-height:1.6;
-">
-  <div>Base Price: <strong>R${d.basePrice}</strong></div>
-
-  ${
-    d.embroideryPrice > 0
-      ? `<div>Embroidery: +R${d.embroideryPrice}</div>`
-      : ''
-  }
-
-  <div style="
-    margin-top:.3rem;
-    color:#B89B5E;
-    font-weight:700;
-  ">
-    Total: R${d.totalPrice}
-  </div>
-</div>      <button class="review-edit-btn" onclick="editCover(${i})">Edit This Cover</button>
+      <div class="rc-extras">
+        ${parts.length ? parts.join(' · ') : 'No personalisation'}
+      </div>
+      <div style="margin-top:.7rem;padding-top:.7rem;border-top:1px solid rgba(255,255,255,.08);font-size:.85rem;line-height:1.6;">
+        <div>Base Price: <strong>R${d.basePrice}</strong></div>
+        ${d.embroideryPrice > 0 ? `<div>Embroidery: +R${d.embroideryPrice}</div>` : ''}
+        <div style="margin-top:.3rem;color:#B89B5E;font-weight:700;">Total: R${d.totalPrice}</div>
+      </div>
+      <button class="review-edit-btn" onclick="removeCartDesign(${i})">✕ Remove</button>
     </div>`;
   }).join('');
+  const totalEl = document.getElementById('reviewTotalAmount');
+  if (totalEl) totalEl.textContent = `R${grandTotal}`;
 }
 
-function editCover(i) {
-  build.current = i;
-  loadDraftForIndex(i);
-  goToBuilderStep(2);
+function addAnotherCover() {
+  // Go back to collections on the homepage so user can pick a new cover type
+  showHomepage();
+  document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' });
 }
+
+function removeCartDesign(flatIdx) {
+  // Remove a single design from the cart by flat index across all items
+  const cart = loadCart();
+  let count = 0;
+  for (let i = 0; i < cart.length; i++) {
+    const item = cart[i];
+    for (let j = 0; j < (item.designs || []).length; j++) {
+      if (count === flatIdx) {
+        item.designs.splice(j, 1);
+        if (item.designs.length === 0) cart.splice(i, 1);
+        saveCart(cart);
+        updateCartBadge();
+        renderReview();
+        return;
+      }
+      count++;
+    }
+  }
+}
+
+
 
 function restartBuilder() {
-  if (!confirm('Discard this build and start over?')) return;
+  if (!confirm('Discard all designs and start over? This will clear your cart.')) return;
   build.action    = null;
   build.queue     = [];
   build.current   = 0;
   build.designs   = [];
   build.fullsetMode = null;
+  saveCart([]);
+  updateCartBadge();
   showHomepage();
 }
 
@@ -2451,6 +2509,8 @@ const lines = item.designs.map(d => {
 function removeCartItem(idx) { const c = loadCart(); c.splice(idx, 1); saveCart(c); updateCartBadge(); renderCart(); }
 function clearCart() { if (!confirm('Empty your cart?')) return; saveCart([]); updateCartBadge(); renderCart(); }
 function addBuildToCart() {
+  // Ensure the current design state is captured (user may not have clicked Save & Next)
+  build.designs[build.current] = captureCurrent();
   const item = {
     id: 'b_' + Date.now(),
     kind: build.mode,
@@ -2475,22 +2535,21 @@ function confirmOrder() {
   let summary = `Hi Fusion Golf! I'd like to place an order:\n\nFrom: ${name}\nContact: ${contact}\n`;
   if (notes) summary += `Notes: ${notes}\n`;
   summary += `\n— ORDER —\n`;
+  let grandTotal = 0;
   cart.forEach((item, i) => {
-    const title = item.kind === 'fullset'
-      ? `Full Set (${item.fullsetMode === 'same' ? 'matching' : 'mixed'})`
-      : `${item.designs.length} Cover${item.designs.length > 1 ? 's' : ''}`;
-    summary += `\n${i+1}. ${title}\n`;
     item.designs.forEach(d => {
-      summary += `   • ${d.coverType} — ${d.style}, shell: ${d.shellName}, trim: ${d.trimName}`;
+      grandTotal += d.totalPrice || 0;
+      summary += `\n• ${d.coverType} — ${d.style}, shell: ${d.shellName}, trim: ${d.trimName}`;
       if (d.useSecondary) summary += `, secondary: ${d.secondaryName}`;
       if (d.number)  summary += `, number "${d.number}" at ${d.numberPos} (${d.numberColorName})`;
       if (d.initials) summary += `, initials "${d.initials}" at ${d.initialsPos} (${d.initialsColorName})`;
-      summary += `\n`;
+      summary += ` — R${d.totalPrice}`;
     });
   });
-  summary += `\nPlease confirm and send pricing. Thanks!`;
+  summary += `\n\nEstimated Total: R${grandTotal}\n\nPlease confirm and send pricing. Thanks!`;
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(summary)}`, '_blank');
   saveCart([]);
+  build.designs = [];
   updateCartBadge();
   closeCart();
   showToast('Order sent! ✓');
