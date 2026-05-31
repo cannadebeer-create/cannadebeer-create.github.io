@@ -1,0 +1,2513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fusion Golf — Premium Handmade Head Covers</title>
+<meta name="description" content="Handcrafted premium golf head covers, built around your style. Made by hand in South Africa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===================== DESIGN TOKENS ===================== */
+:root{
+--navy:#0B1F3A;
+--navy-light:#1E3A5F;
+
+--brown:#5A3E2B;
+--gold:#B89B5E;
+--gold-light:#d4b87a;
+
+--cream:#F5F1E8;
+--sand:#D8C7A1;
+--black:#1A1A1A;
+
+--navy-muted:#344c57;
+--navy-soft:#3B5B7A;
+}
+/* ===================== RESET ===================== */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+html,body{overflow-x:hidden;}
+body{font-family:'Poppins',sans-serif;background:var(--cream);color:var(--black);}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.4;}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;}
+h1,h2,h3,h4,h5,h6,p,span,a,li,label,button{overflow-wrap:anywhere;word-break:break-word;hyphens:auto;}
+img,svg,video{max-width:100%;height:auto;}
+
+/* ===================== NAV ===================== */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(1.5rem,5vw,4rem);height:72px;display:flex;align-items:center;justify-content:space-between;transition:background .4s;}
+nav.scrolled{background:rgba(31, 34, 58, 0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(184,155,94,0.2);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--cream);letter-spacing:.05em;text-decoration:none;cursor:pointer;}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{color:rgba(245,241,232,0.8);text-decoration:none;font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:color .3s;cursor:pointer;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:.5rem 1.4rem;font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .3s;text-decoration:none;}
+.nav-cta:hover{background:var(--gold);color:var(--black);}
+.nav-right{display:flex;align-items:center;gap:.5rem;}
+.nav-mobile-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  position: relative;
+  z-index: 2600;
+}
+
+.nav-mobile-btn span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--cream);
+  transition: all .3s;
+}
+
+/* CART ICON */
+.cart-icon-btn {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--cream);
+  padding: .5rem;
+  display: inline-flex;
+  align-items: center;
+  z-index: 2600;
+}
+
+.cart-icon-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.cart-icon-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--gold);
+  color: var(--black);
+  font-size: .62rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+/* MOBILE NAV (MAIN FIX HERE) */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 22, 18, 0.98);
+
+  /* IMPORTANT: below cart but above page */
+  z-index: 2500;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+
+  transform: translateX(100%);
+  transition: transform .4s cubic-bezier(0.25,0.46,0.45,0.94);
+
+  pointer-events: none; /* prevents hidden layer blocking clicks */
+}
+
+.mobile-nav.open {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* LINKS */
+.mobile-nav a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--cream);
+  text-decoration: none;
+  letter-spacing: .05em;
+  transition: color .3s;
+  cursor: pointer;
+}
+
+.mobile-nav a:hover {
+  color: var(--gold);
+}
+
+/* CLOSE BUTTON (THIS WAS YOUR MAIN BUG) */
+.mobile-nav-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+
+  background: rgba(255,255,255,0.06);
+  border: none;
+  color: var(--cream);
+  font-size: 1.6rem;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  z-index: 2601; /* MUST be above menu + everything else */
+}
+/* ===================== VIEWS ===================== */
+.view{display:none;}
+.view.active{display:block;}
+
+/* ===================== HOMEPAGE ===================== */
+#hero{
+  position:relative;
+  min-height:100vh;
+  min-height:850px;
+  padding-bottom:140px;
+  padding-top:140px;
+  display:flex;
+  align-items:flex-start;
+  overflow:hidden;
+  background:linear-gradient(135deg,#081726 0%,#0B1F3A 40%,#102A44 70%,#07131f 100%);
+}
+
+.hero-bg-pattern{
+  position:relative;
+  inset:0;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 70% 50%,rgba(184,155,94,.08) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 80% at 20% 80%,rgba(90,62,43,.25) 0%,transparent 50%);
+}
+
+.hero-grid-lines{
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(184,155,94,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(184,155,94,.04) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+
+.hero-circle{
+  position:absolute;
+  right:-5%;
+  top:50%;
+  transform:translateY(-50%);
+  width:min(700px,55vw);
+  height:min(700px,55vw);
+  border-radius:50%;
+  background:radial-gradient(
+    ellipse at 40% 40%,
+    rgba(184,155,94,.15),
+    rgba(11,31,58,.45)
+  );
+  border:1px solid rgba(184,155,94,.15);
+}
+.hero-circle::after{content:'';position:absolute;inset:30px;border-radius:50%;border:1px solid rgba(184,155,94,.08);}
+.hero-content{position:relative;z-index:2;padding:0 clamp(1.5rem,5vw,5rem);max-width:700px;}
+.hero-label{font-size:.72rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem;opacity:0;animation:fadeUp .8s .2s forwards;}
+.hero-label::before{content:'';display:block;width:2.5rem;height:1px;background:var(--gold);}
+.hero-h1{font-size:clamp(3.5rem,8vw,6.5rem);font-weight:300;line-height:.95;color:var(--cream);margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .4s forwards;}
+.hero-h1 em{font-style:italic;color:var(--gold);}
+.hero-accent{font-family:'Cormorant Garamond',serif;font-size:1.35em;font-style:italic;font-weight:600;color:var(--gold);background:linear-gradient(180deg,#d8b974 0%,#B89B5E 55%,#8a7038 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;padding:0 .08em;position:relative;display:inline-block;}
+.hero-accent::after{content:"";position:absolute;left:.1em;right:.1em;bottom:-.08em;height:1px;background:linear-gradient(90deg,transparent,rgba(184,155,94,.7),transparent);}
+.hero-sub{font-size:clamp(.9rem,1.5vw,1rem);font-weight:300;line-height:1.8;color:rgba(245,241,232,.65);max-width:480px;margin-bottom:3rem;opacity:0;animation:fadeUp .8s .6s forwards;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .8s forwards;}
+.btn-primary{background:var(--gold);color:var(--black);border:none;padding:.9rem 2.2rem;font-family:'Poppins',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block;}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--cream);border:1px solid rgba(245,241,232,.4);padding:.9rem 2.2rem;font-family:'Poppins',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+.hero-stats{
+  position:absolute;
+  bottom:1.2rem;
+  left:0;
+  right:0;
+  padding:0 clamp(1.5rem,5vw,5rem);
+  display:flex;
+  gap:3rem;
+  flex-wrap:wrap;
+  opacity:0;
+  animation:fadeUp .8s 1s forwards;
+}
+@media(max-width:768px){
+
+  .hero-stats{
+    position:relative;
+    margin-top:3rem;
+    bottom:auto;
+    padding-top:2rem;
+    justify-content:center;
+  }
+
+}
+.hero-stat-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--gold);line-height:1;}
+.hero-stat-label{font-size:.7rem;letter-spacing:.1em;color:rgba(245,241,232,.5);text-transform:uppercase;margin-top:.2rem;}
+.tagline-band{background:var(--gold);padding:1.2rem clamp(1.5rem,5vw,5rem);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1rem 2rem;text-align:center;}
+section{padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,5rem);}
+.section-label{font-size:.7rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;}
+.section-label::before{content:'';display:block;width:2rem;height:1px;background:var(--gold);}
+.section-h2{font-size:clamp(2.5rem,5vw,4rem);font-weight:400;line-height:1.1;color:var(--navy);margin-bottom:1.5rem;}
+.section-h2 em{font-style:italic;color:var(--brown);}
+.section-p{font-size:.92rem;line-height:1.9;color:rgba(26,26,26,.65);max-width:540px;}
+
+/* ===================== COLLECTIONS ===================== */
+#collections{background:var(--cream);}
+.collections-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem;}
+.collections-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.collection-card{position:relative;overflow:hidden;cursor:pointer;min-width:0;}
+.card-img-placeholder{width:100%;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;transition:transform .6s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden;}
+.collection-card:hover .card-img-placeholder{transform:scale(1.04);}
+.card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,18,.85) 0%,rgba(10,22,18,.2) 50%,transparent 100%);}
+.card-content{position:absolute;bottom:0;left:0;right:0;padding:2rem 1.8rem;transform:translateY(.5rem);transition:transform .4s;}
+.collection-card:hover .card-content{transform:translateY(0);}
+.card-tag{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:500;color:var(--cream);margin-bottom:.3rem;}
+.card-price{font-size:.85rem;color:rgba(245,241,232,.7);margin-bottom:1rem;}
+.card-btn{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(184,155,94,.4);padding-bottom:2px;opacity:0;transform:translateY(8px);transition:all .3s .1s;cursor:pointer;}
+.collection-card:hover .card-btn{opacity:1;transform:translateY(0);}
+
+/* ===================== PROCESS ===================== */
+#process{background:var(--cream);overflow:hidden;}
+.process-timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:4rem;position:relative;}
+.process-timeline::before{content:'';position:absolute;top:40px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--sand) 20%,var(--gold) 50%,var(--sand) 80%,transparent);}
+.process-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 1rem;min-width:0;}
+.process-icon{width:80px;height:80px;border-radius:50%;background:var(--cream);border:1px solid var(--sand);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;position:relative;z-index:2;font-size:1.8rem;transition:all .4s;flex-shrink:0;}
+.process-step:hover .process-icon{background:var(--navy);border-color:var(--gold);transform:translateY(-4px);}
+.process-num{position:absolute;top:-8px;right:-8px;width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--black);font-size:.65rem;font-weight:600;display:flex;align-items:center;justify-content:center;}
+.process-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--navy);margin-bottom:.5rem;}
+.process-desc{font-size:.78rem;line-height:1.7;color:rgba(26,26,26,.55);}
+
+/* ===================== CRAFTSMANSHIP ===================== */
+#craftsmanship{background:var(--navy);color:var(--cream);position:relative;overflow:hidden;}
+#craftsmanship::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 85% 50%,rgba(184,155,94,.06),transparent),radial-gradient(ellipse 30% 50% at 10% 20%,rgba(90,62,43,.2),transparent);}
+.craft-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:2;}
+.craft-content .section-h2{color:var(--cream);}
+.craft-content .section-p{color:rgba(245,241,232,.55);}
+.craft-features{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem;}
+.craft-feature{padding:1.5rem;border:1px solid rgba(184,155,94,.15);position:relative;transition:border-color .3s;}
+.craft-feature:hover{border-color:rgba(184,155,94,.4);}
+.craft-feature::before{content:'';position:absolute;top:0;left:0;width:3rem;height:2px;background:var(--gold);}
+.craft-feature-icon{font-size:1.5rem;margin-bottom:.8rem;}
+.craft-feature-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--cream);margin-bottom:.4rem;}
+.craft-feature-desc{font-size:.75rem;line-height:1.7;color:rgba(245,241,232,.45);}
+.craft-visual{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:1rem;}
+.craft-img-block{border-radius:0;overflow:hidden;position:relative;}
+.craft-img-block:first-child{grid-column:span 2;}
+.craft-img-placeholder{width:100%;display:flex;align-items:center;justify-content:center;font-size:2rem;position:relative;overflow:hidden;}
+.craft-img-block:first-child .craft-img-placeholder{aspect-ratio:16/7;}
+.craft-img-block:not(:first-child) .craft-img-placeholder{aspect-ratio:1;}
+
+/* ===================== GALLERY ===================== */
+#gallery{background:#f0ece2;}
+.gallery-masonry{columns:3;column-gap:1rem;margin-top:3rem;}
+.gallery-item{break-inside:avoid;margin-bottom:1rem;position:relative;overflow:hidden;cursor:pointer;}
+.gallery-item-img{width:100%;display:block;transition:transform .5s cubic-bezier(.25,.46,.45,.94);}
+.gallery-item:hover .gallery-item-img{transform:scale(1.05);}
+.gallery-overlay{position:absolute;inset:0;background:rgba(31,58,50,0);transition:background .4s;display:flex;align-items:center;justify-content:center;}
+.gallery-item:hover .gallery-overlay{background:rgba(31,58,50,.5);}
+.gallery-plus{color:var(--gold);font-size:2rem;opacity:0;transform:scale(.7);transition:all .3s;}
+.gallery-item:hover .gallery-plus{opacity:1;transform:scale(1);}
+
+/* ===================== TESTIMONIALS ===================== */
+#testimonials{background:var(--cream);overflow:hidden;}
+.testimonials-header{text-align:center;margin-bottom:4rem;}
+.testimonials-header .section-label{justify-content:center;}
+.testimonials-header .section-label::before{display:none;}
+.testimonials-track-wrap{overflow:hidden;position:relative;}
+.testimonials-track{display:flex;gap:1.5rem;transition:transform .5s cubic-bezier(.25,.46,.45,.94);}
+.testimonial-card{flex:0 0 calc(33.333% - 1rem);padding:2.5rem;background:white;border:1px solid rgba(184,155,94,.15);position:relative;min-width:0;}
+.testimonial-card::before{content:'"';position:absolute;top:1rem;right:1.5rem;font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;color:rgba(184,155,94,.2);line-height:1;}
+.testimonial-stars{color:var(--gold);font-size:.85rem;margin-bottom:1rem;letter-spacing:.1em;}
+.testimonial-text{font-size:.88rem;line-height:1.9;color:rgba(26,26,26,.7);margin-bottom:1.5rem;font-style:italic;}
+.testimonial-author{display:flex;align-items:center;gap:1rem;}
+.testimonial-avatar{width:44px;height:44px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--gold);flex-shrink:0;}
+.testimonial-name{font-weight:600;font-size:.85rem;color:var(--navy);}
+.testimonial-location{font-size:.72rem;color:rgba(26,26,26,.45);margin-top:1px;}
+.testimonial-controls{display:flex;gap:.8rem;margin-top:2.5rem;justify-content:center;}
+.t-btn{width:44px;height:44px;border:1px solid var(--sand);background:transparent;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.t-btn:hover{border-color:var(--gold);background:var(--gold);color:var(--black);}
+
+/* ===================== FAQ ===================== */
+#faq{background:#f0ece2;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:3rem;background:var(--sand);}
+.faq-item{background:#f0ece2;padding:1.8rem 2rem;cursor:pointer;min-width:0;}
+.faq-q{display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+.faq-q-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--navy);}
+.faq-toggle{font-size:1.2rem;color:var(--gold);transition:transform .3s;flex-shrink:0;}
+.faq-item.open .faq-toggle{transform:rotate(45deg);}
+.faq-a{font-size:.83rem;line-height:1.85;color:rgba(26,26,26,.6);max-height:0;overflow:hidden;transition:all .4s;}
+.faq-item.open .faq-a{margin-top:1rem;max-height:200px;}
+
+/* ===================== CONTACT ===================== */
+#contact{background:var(--navy);position:relative;overflow:hidden;}
+#contact::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(184,155,94,.07),transparent);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;position:relative;z-index:2;}
+.contact-content .section-h2{color:var(--cream);font-size:clamp(2.5rem,4vw,3.5rem);}
+.contact-content .section-p{color:rgba(245,241,232,.55);}
+.contact-info{margin-top:2rem;display:flex;flex-direction:column;gap:1rem;}
+.contact-info-item{display:flex;align-items:center;gap:1rem;font-size:.85rem;color:rgba(245,241,232,.65);}
+.contact-info-icon{width:38px;height:38px;border:1px solid rgba(184,155,94,.3);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.contact-social{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;}
+.social-btn{display:flex;align-items:center;gap:.6rem;padding:.7rem 1.4rem;border:1px solid rgba(245,241,232,.2);color:rgba(245,241,232,.8);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:all .3s;background:transparent;}
+.social-btn:hover{border-color:var(--gold);color:var(--gold);}
+.social-btn.whatsapp:hover{background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.5);color:#25d366;}
+.social-btn.instagram:hover{background:rgba(228,64,95,.08);border-color:rgba(228,64,95,.4);color:#e4405f;}
+.contact-form{display:flex;flex-direction:column;gap:1rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.form-group{display:flex;flex-direction:column;gap:.4rem;}
+.form-label{font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,241,232,.4);}
+.form-input,.form-select,.form-textarea{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--cream);padding:.8rem 1rem;font-family:'Poppins',sans-serif;font-size:.83rem;outline:none;transition:border-color .3s;width:100%;}
+.form-select option{background:var(--navy);}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:rgba(184,155,94,.5);}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(245,241,232,.25);}
+.form-textarea{resize:vertical;min-height:120px;}
+.form-submit{background:var(--gold);border:none;color:var(--black);padding:1rem;font-family:'Poppins',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:.5rem;}
+.form-submit:hover{background:var(--gold-light);transform:translateY(-2px);}
+
+/* ===================== FOOTER ===================== */
+footer{background:#0d1f18;padding:4rem clamp(1.5rem,5vw,5rem) 2rem;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:2rem;}
+.footer-brand-name{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--cream);margin-bottom:.5rem;}
+.footer-brand-name span{color:var(--gold);}
+.footer-tagline{font-size:.78rem;line-height:1.8;color:rgba(245,241,232,.35);max-width:260px;margin-top:.5rem;}
+.footer-col-title{font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,241,232,.4);margin-bottom:1.2rem;}
+.footer-links{list-style:none;}
+.footer-links li{margin-bottom:.6rem;}
+.footer-links a{font-size:.82rem;color:rgba(245,241,232,.5);text-decoration:none;transition:color .3s;cursor:pointer;}
+.footer-links a:hover{color:var(--gold);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-copy{font-size:.72rem;color:rgba(245,241,232,.25);}
+.footer-copy span{color:var(--gold);}
+
+/* ===================== QUICK VIEW MODAL ===================== */
+.modal-backdrop{position:fixed;inset:0;z-index:2000;background:rgba(10,22,18,.88);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:1rem;}
+.modal-backdrop.open{display:flex;}
+.modal-box{background:#111;border:1px solid rgba(184,155,94,.2);max-width:640px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:modalIn .3s cubic-bezier(.34,1.2,.64,1);}
+@keyframes modalIn{from{opacity:0;transform:translateY(20px) scale(.97);}to{opacity:1;transform:none;}}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:rgba(245,241,232,.5);font-size:1.5rem;cursor:pointer;line-height:1;z-index:10;transition:color .2s;}
+.modal-close:hover{color:var(--gold);}
+.qv-inner{padding:2.5rem;}
+.qv-tag{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;}
+.qv-title{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:500;color:var(--cream);margin-bottom:.4rem;}
+.qv-price{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);margin-bottom:1.2rem;}
+.qv-desc{font-size:.83rem;line-height:1.8;color:rgba(245,241,232,.55);margin-bottom:1.5rem;}
+.qv-features{margin-bottom:1.5rem;}
+.qv-feature-row{display:flex;gap:.6rem;align-items:flex-start;margin-bottom:.5rem;}
+.qv-feature-row span:first-child{color:var(--gold);margin-top:2px;flex-shrink:0;}
+.qv-feature-row span:last-child{font-size:.82rem;color:rgba(245,241,232,.65);}
+.qv-styles{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,241,232,.3);margin-bottom:2rem;}
+.qv-actions{display:flex;gap:.8rem;flex-wrap:wrap;}
+.qv-btn-shop{flex:1;min-width:140px;padding:.9rem 1.6rem;background:transparent;border:1px solid var(--gold);color:var(--gold);font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .3s;}
+.qv-btn-shop:hover{background:rgba(184,155,94,.15);}
+.qv-btn-build{flex:1;min-width:140px;padding:.9rem 1.6rem;background:var(--gold);border:none;color:var(--black);font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .3s;}
+.qv-btn-build:hover{background:var(--gold-light);}
+
+/* ===================== BUILDER PAGE ===================== */
+#builderPage{background:var(--black);min-height:100vh;padding-top:72px;}
+.builder-header{background:linear-gradient(135deg,#0d2018,#0B1F3A);padding:3rem clamp(1.5rem,5vw,5rem) 2rem;border-bottom:1px solid rgba(184,155,94,.15);}
+.builder-breadcrumb{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,241,232,.35);margin-bottom:.8rem;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;transition:color .2s;}
+.builder-breadcrumb:hover{color:var(--gold);}
+.builder-header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:400;color:var(--cream);}
+.builder-header h1 em{font-style:italic;color:var(--gold);}
+.builder-header p{font-size:.85rem;color:rgba(245,241,232,.45);margin-top:.5rem;}
+
+/* Stepper */
+.builder-stepper{display:flex;justify-content:center;gap:.5rem;padding:2rem clamp(1.5rem,5vw,5rem);flex-wrap:wrap;}
+.step-pill{display:inline-flex;align-items:center;gap:.6rem;padding:.55rem 1.2rem;border:1px solid rgba(184,155,94,.2);color:rgba(245,241,232,.4);font-family:'Poppins',sans-serif;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;border-radius:999px;background:rgba(255,255,255,.02);transition:all .3s;}
+.step-pill span{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(184,155,94,.15);color:var(--gold);font-weight:700;font-size:.68rem;}
+.step-pill.active{background:var(--gold);color:var(--black);border-color:var(--gold);}
+.step-pill.active span{background:rgba(0,0,0,.15);color:var(--black);}
+.step-pill.done{border-color:rgba(184,155,94,.5);color:var(--gold);}
+
+/* Steps */
+.builder-content{padding:2rem clamp(1.5rem,5vw,5rem) 4rem;}
+.bstep{display:none;}
+.bstep.active{display:block;}
+
+/* Mode selection cards */
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;max-width:600px;margin:1.5rem 0;}
+.mode-card{padding:2rem 1.6rem;cursor:pointer;border:1px solid rgba(184,155,94,.2);background:rgba(255,255,255,.02);text-align:left;transition:all .22s ease;}
+.mode-card:hover{border-color:var(--gold);background:rgba(184,155,94,.07);}
+.mode-card.active{border-color:var(--gold);background:rgba(184,155,94,.12);box-shadow:0 0 0 1px var(--gold) inset;}
+.mode-icon{font-size:2rem;margin-bottom:.6rem;}
+.mode-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--cream);margin-bottom:.3rem;}
+.mode-tag{font-size:.78rem;color:rgba(245,241,232,.5);line-height:1.5;}
+
+/* Config layout */
+.configurator-wrap{display:grid;grid-template-columns:1fr 380px;gap:0;min-height:600px;border:1px solid rgba(255,255,255,.06);}
+.config-preview{position:relative;background:linear-gradient(135deg,#0d1f18 0%,#1a2e26 100%);display:flex;align-items:center;justify-content:center;padding:3rem;overflow:hidden;}
+.config-preview::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(184,155,94,.08),transparent);}
+.config-canvas{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:1.5rem;}
+.headcover-svg{width:min(280px,55vw);filter:drop-shadow(0 20px 60px rgba(0,0,0,.5));transition:all .5s cubic-bezier(.34,1.56,.64,1);}
+.config-template-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:rgba(245,241,232,.5);letter-spacing:.1em;}
+.current-cover-tag{color:var(--gold);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;text-align:center;}
+.config-panel{background:#111;padding:2.5rem 2rem;overflow-y:auto;border-left:1px solid rgba(255,255,255,.06);min-width:0;}
+.config-section{margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.config-section:last-child{border-bottom:none;margin-bottom:0;}
+.config-label{font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,241,232,.4);margin-bottom:1rem;}
+.template-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
+.template-card{padding:.7rem .8rem;border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:all .25s;text-align:center;}
+.template-card.active{border-color:var(--gold);background:rgba(184,155,94,.08);}
+.template-card:hover:not(.active){border-color:rgba(255,255,255,.2);}
+.template-card-name{font-size:.72rem;font-weight:500;color:rgba(245,241,232,.8);letter-spacing:.05em;}
+.template-card-tag{font-size:.6rem;color:rgba(245,241,232,.3);margin-top:2px;letter-spacing:.08em;}
+.template-card.active .template-card-name{color:var(--gold);}
+.template-card.active .template-card-tag{color:rgba(184,155,94,.6);}
+
+/* Colour swatches */
+.color-swatches{display:flex;gap:.6rem;flex-wrap:wrap;}
+.swatch{width:32px;height:32px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .25s;}
+.swatch.active{border-color:var(--gold);transform:scale(1.15);}
+.swatch:hover:not(.active){transform:scale(1.1);}
+.config-tab{padding:.4rem .9rem;font-size:.72rem;font-weight:500;letter-spacing:.08em;background:transparent;border:1px solid rgba(255,255,255,.12);color:rgba(245,241,232,.5);cursor:pointer;transition:all .25s;font-family:'Poppins',sans-serif;}
+.config-tab.active{background:var(--gold);border-color:var(--gold);color:var(--black);}
+.config-tab:hover:not(.active){border-color:var(--gold);color:var(--gold);}
+.config-tabs{display:flex;gap:.5rem;flex-wrap:wrap;}
+.config-btn-primary{width:100%;padding:.85rem;background:var(--gold);border:none;color:var(--black);font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .3s;}
+.config-btn-primary:hover{background:var(--gold-light);}
+.config-btn-outline{width:100%;padding:.85rem;background:transparent;border:1px solid rgba(255,255,255,.15);color:rgba(245,241,232,.7);font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .3s;}
+.config-btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+/* Progress */
+.customise-progress{margin-bottom:1.2rem;color:rgba(245,241,232,.6);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;}
+.customise-progress strong{color:var(--gold);}
+.customise-nav{display:flex;gap:.8rem;flex-wrap:wrap;}
+.customise-nav button{flex:1;min-width:120px;}
+.customise-nav button:disabled{opacity:.4;cursor:not-allowed;}
+
+/* Progress bar */
+.progress-bar-wrap{background:rgba(255,255,255,.06);height:3px;margin-bottom:2rem;border-radius:2px;overflow:hidden;}
+.progress-bar-fill{height:100%;background:var(--gold);border-radius:2px;transition:width .5s cubic-bezier(.25,.46,.45,.94);}
+
+/* Review */
+.review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;margin-top:1.5rem;}
+.review-card{border:1px solid rgba(184,155,94,.25);background:rgba(255,255,255,.02);padding:1.4rem;}
+.review-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem;}
+.rc-type{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--cream);}
+.rc-style{font-size:.72rem;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.5rem;}
+.rc-swatches{display:flex;gap:.4rem;margin-bottom:.5rem;flex-wrap:wrap;align-items:center;}
+.rc-swatch{width:22px;height:22px;border-radius:50%;border:1px solid rgba(255,255,255,.2);}
+.rc-swatch-label{font-size:.65rem;color:rgba(245,241,232,.4);letter-spacing:.05em;}
+.rc-extras{font-size:.72rem;color:rgba(245,241,232,.5);margin-bottom:.9rem;line-height:1.5;}
+.review-edit-btn{background:none;border:1px solid rgba(184,155,94,.4);color:var(--gold);padding:.5rem 1rem;cursor:pointer;font-family:'Poppins',sans-serif;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;width:100%;transition:all .3s;}
+.review-edit-btn:hover{background:var(--gold);color:var(--black);}
+.review-actions{display:flex;gap:1rem;justify-content:center;margin-top:2rem;flex-wrap:wrap;}
+.review-actions button{min-width:160px;}
+
+/* Checkout block */
+.checkout-block{background:rgba(184,155,94,.08);border:1px solid rgba(184,155,94,.25);padding:2rem;margin-top:2rem;max-width:560px;}
+.checkout-btn{width:100%;padding:1rem;background:var(--gold);border:none;color:var(--black);font-family:'Poppins',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:.8rem;}
+.checkout-btn:hover{background:var(--gold-light);transform:translateY(-2px);}
+
+/* Dream box */
+.dream-box{margin-top:2rem;padding:2rem;border:1px solid rgba(184,155,94,.2);background:rgba(184,155,94,.05);}
+.dream-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--cream);margin-bottom:.4rem;}
+.dream-desc{font-size:.8rem;color:rgba(245,241,232,.5);line-height:1.7;margin-bottom:1rem;}
+.dream-toggle-btn{font-size:.76rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:none;border:none;border-bottom:1px solid rgba(184,155,94,.5);padding-bottom:3px;cursor:pointer;}
+
+/* Shop designs placeholder */
+.shop-placeholder{padding:3rem 2rem;text-align:center;border:1px dashed rgba(184,155,94,.3);background:rgba(184,155,94,.04);max-width:560px;}
+.shop-placeholder h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--cream);margin-bottom:.7rem;}
+.shop-placeholder p{font-size:.82rem;color:rgba(245,241,232,.5);line-height:1.7;margin-bottom:1.5rem;}
+.shop-placeholder-actions{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;}
+
+/* Cart */
+.cart-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  z-index: 1999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+
+.cart-drawer-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(420px, 100vw);
+  background: #1A1A1A;
+  border-left: 1px solid rgba(184,155,94,.2);
+  z-index: 2000;
+  transform: translateX(100%);
+  transition: transform .3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+/* OPEN STATE */
+.cart-drawer.open {
+  transform: translateX(0);
+}
+
+/* HEADER */
+.cart-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  position: relative;
+  z-index: 2001;
+}
+
+.cart-drawer-header h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  color: var(--cream);
+  margin: 0;
+}
+
+/* CLOSE BUTTON (FIXED) */
+.cart-drawer-close {
+  color: var(--cream) !important;
+  font-size: 1.4rem !important;
+  background: rgba(255,255,255,0.06);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 2002;
+  line-height: 1;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.cart-drawer-close:hover {
+  background: rgba(255,255,255,0.12);
+  transform: rotate(90deg);
+}
+.cart-drawer-body{flex:1;overflow-y:auto;padding:1rem 1.5rem;}
+.cart-empty{text-align:center;padding:3rem 1rem;color:rgba(245,241,232,.5);}
+.cart-item{border:1px solid rgba(255,255,255,.08);padding:1rem;margin-bottom:.8rem;position: relative;}
+.cart-item-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem;}
+.cart-item-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--cream);}
+.cart-item-remove{background:none;border:none;color:rgba(245,241,232,.4);cursor:pointer;font-size:1.1rem;transition:color .2s;}
+.cart-item-remove:hover{color:#e74c3c;}
+.cart-item-detail{font-size:.74rem;color:rgba(245,241,232,.55);line-height:1.6;}
+.cart-drawer-footer{padding:1.2rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;gap:.6rem;}
+.cart-drawer-footer button{width:100%;padding:.9rem;cursor:pointer;font-family:'Poppins',sans-serif;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;}
+.cart-confirm-btn{background:var(--gold);border:none;color:var(--black);}
+.cart-confirm-btn:hover{background:#d4b66e;}
+.cart-clear-btn{background:none;border:1px solid rgba(255,255,255,.15);color:rgba(245,241,232,.6);}
+.cart-form-row{margin-bottom:.8rem;}
+.cart-form-row label{display:block;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,241,232,.6);margin-bottom:.3rem;}
+.cart-form-row input,.cart-form-row textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);color:var(--cream);padding:.6rem .8rem;font-family:'Poppins',sans-serif;font-size:.85rem;outline:none;}
+.cart-form-row input:focus,.cart-form-row textarea:focus{border-color:var(--gold);}
+.cart-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);padding:.8rem 1.4rem;font-family:'Poppins',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;z-index:3000;opacity:0;pointer-events:none;transition:opacity .25s ease;}
+.cart-toast.show{opacity:1;}
+
+/* Reveal animation */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.cover-shell{transition:fill .4s;}.cover-stitch{transition:stroke .4s;}.cover-trim{transition:fill .4s;}
+
+/* ===================== RESPONSIVE ===================== */
+@media(max-width:1024px){
+  .configurator-wrap{grid-template-columns:1fr;}
+  .config-preview{min-height:360px;}
+  .config-panel{max-height:none;}
+  .craft-grid{grid-template-columns:1fr;gap:3rem;}
+  .contact-grid{grid-template-columns:1fr;gap:3rem;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:2rem;}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none;}
+  .nav-mobile-btn{display:flex;}
+  #hero{height:auto;min-height:0;padding:7rem 0 3rem;flex-direction:column;align-items:stretch;justify-content:flex-start;}
+  .hero-circle{width:min(420px,70vw);height:min(420px,70vw);opacity:.55;}
+  .hero-content{max-width:100%;}
+  .hero-h1{font-size:clamp(2.6rem,11vw,5rem);}
+  .hero-stats{position:static;margin-top:3rem;padding:0 clamp(1.5rem,5vw,5rem);gap:1.75rem;flex-wrap:wrap;width:100%;}
+  .hero-stat-num{font-size:1.5rem;}
+  .collections-grid{grid-template-columns:1fr;}
+  .process-timeline{grid-template-columns:1fr;gap:2rem;}
+  .process-timeline::before{display:none;}
+  .process-step{flex-direction:row;text-align:left;gap:1.5rem;}
+  .process-icon{margin-bottom:0;}
+  .craft-features{grid-template-columns:1fr;}
+  .craft-visual{grid-template-columns:1fr;}
+  .craft-img-block:first-child{grid-column:span 1;}
+  .gallery-masonry{columns:2;}
+  .testimonial-card{flex:0 0 calc(85vw);}
+  .faq-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .contact-social{flex-direction:column;}
+  .mode-grid{grid-template-columns:1fr;}
+  .review-grid{grid-template-columns:1fr;}
+}
+@media(max-width:480px){
+  .section-h2,h2{font-size:clamp(1.8rem,8vw,3rem)!important;line-height:1.1;}
+  .hero-h1{font-size:clamp(2.3rem,12vw,4rem);}
+  .hero-stat-num{font-size:1.4rem;}
+  .hero-stats{gap:1.25rem;}
+  .gallery-masonry{columns:1;}
+  .qv-actions{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== CART BACKDROP ===== -->
+<div class="cart-drawer-backdrop" id="cartBackdrop" onclick="closeCart()"></div>
+
+<!-- ===== CART DRAWER ===== -->
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-header"><h3>Your Design Cart</h3><button class="cart-drawer-close" onclick="closeCart()">✕</button></div>
+  <div class="cart-drawer-body" id="cartBody"></div>
+  <div class="cart-drawer-footer" id="cartFooter" style="display:none;">
+    <div class="cart-form-row"><label>Your Name</label><input id="orderName" placeholder="Full name"></div>
+    <div class="cart-form-row"><label>WhatsApp / Phone</label><input id="orderContact" placeholder="+27 or 0..."></div>
+    <div class="cart-form-row"><label>Notes (optional)</label><textarea id="orderNotes" placeholder="Any extra details..." style="min-height:60px;resize:vertical;"></textarea></div>
+    <button class="cart-confirm-btn" onclick="confirmOrder()">📩 Send Order via WhatsApp</button>
+    <button class="cart-clear-btn" onclick="clearCart()">Clear Cart</button>
+  </div>
+</div>
+
+<!-- ===== MOBILE NAV ===== -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+  <a href="#collections" onclick="closeMobileNav();showHomepage();">Collections</a>
+  <a onclick="closeMobileNav();showHomepage();" href="#process">Process</a>
+  <a onclick="closeMobileNav();showHomepage();" href="#gallery">Gallery</a>
+  <a onclick="closeMobileNav();showHomepage();" href="#contact">Contact</a>
+</div>
+
+<!-- ===== QUICK VIEW MODAL ===== -->
+<div class="modal-backdrop" id="quickViewModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeQuickView()">✕</button>
+    <div class="qv-inner" id="qvContent"></div>
+  </div>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav id="mainNav">
+  <a class="nav-logo" onclick="showHomepage()">Fusion<span>.</span>Golf</a>
+  <ul class="nav-links">
+    <li><a onclick="showHomepage()" href="#collections">Collections</a></li>
+    <li><a onclick="showHomepage()" href="#process">Process</a></li>
+    <li><a onclick="showHomepage()" href="#gallery">Gallery</a></li>
+    <li><a onclick="showHomepage()" href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a class="nav-cta" onclick="showHomepage()" href="#collections">Shop Covers</a>
+    <button class="cart-icon-btn" onclick="openCart()" title="View cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-icon-badge" id="cartBadge">0</span>
+    </button>
+    <div class="nav-mobile-btn" onclick="openMobileNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- ===================== HOMEPAGE ===================== -->
+<div id="homepageView" class="view active">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="hero-circle"></div>
+    <div class="hero-content">
+      <div class="hero-label">Premium Handmade · South Africa</div>
+      <h1 class="hero-h1">Elevate<br>Your <em>Golf</em><br>Bag.</h1>
+      <p class="hero-sub">Premium handcrafted golf head covers designed around your style. Each piece made by hand, built to <span class="hero-accent">last</span>, and crafted to impress.</p>
+      <div class="hero-btns">
+
+    </div>
+   
+  </section>
+
+  <!-- TAGLINE BAND -->
+  <div class="tagline-band">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(.9rem,2.4vw,1.1rem);font-style:italic;color:var(--black);">Affordable covers with a priceless look</span>
+    <span style="color:rgba(26,26,26,.3);font-size:.8rem;">✦</span>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(.9rem,2.4vw,1.1rem);font-style:italic;color:var(--black);">Premium handmade golf head covers with a personal touch</span>
+  </div>
+
+ <!-- COLLECTIONS -->
+<section id="collections">
+  <div class="collections-header">
+    <div>
+      <div class="section-label reveal">Our Collections</div>
+      <h2 class="section-h2 reveal">Crafted for <em>Every</em> Golfer</h2>
+    </div>
+    <div class="reveal">
+      <p class="section-p" style="max-width:320px;">
+        Each head cover is individually crafted with premium materials and meticulous attention to detail.
+      </p>
+    </div>
+  </div>
+
+  <div class="collections-grid">
+
+    <!-- DRIVER -->
+    <div class="collection-card reveal" onclick="openQuickView('driver')">
+      <div class="card-img-placeholder" style="background:linear-gradient(145deg,#1a242e,#36576d,#0f3261);">
+
+        <svg width="260" height="340" viewBox="0 0 260 320">
+
+          <!-- base shadow -->
+          <ellipse cx="130" cy="310" rx="70" ry="12" fill="rgba(0,0,0,.3)"/>
+
+          <!-- MATCHED BUILDER SHAPE -->
+          <path d="M50 130 Q55 30 130 20 Q205 30 210 130
+                   L200 280 Q165 300 130 300
+                   Q95 300 60 280 Z"
+                fill="#5A3E2B"/>
+
+          <!-- seam curve -->
+          <path d="M50 130 Q55 30 130 20 Q205 30 210 130"
+                fill="none"
+                stroke="#B89B5E"
+                stroke-width="2"
+                opacity=".9"/>
+
+          <!-- badge circle -->
+          <circle cx="130" cy="90" r="24"
+                  fill="#B89B5E"
+                  opacity=".18"
+                  stroke="#B89B5E"
+                  stroke-width="1.2"/>
+
+          <!-- label -->
+          <text x="130" y="98"
+                text-anchor="middle"
+                font-family="Cormorant Garamond,serif"
+                font-size="16"
+                fill="#B89B5E"
+                font-weight="600">D</text>
+
+        </svg>
+
+      </div>
+
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <div class="card-tag">Head Cover</div>
+        <div class="card-title">Driver Cover</div>
+        <div class="card-price">From R 250</div>
+        <div class="card-btn">View Details →</div>
+      </div>
+    </div>
+
+    <!-- FAIRWAY WOOD -->
+    <div class="collection-card reveal" onclick="openQuickView('wood')">
+      <div class="card-img-placeholder" style="background:linear-gradient(145deg,#634d33,#7c5035,#442816);">
+
+        <svg width="230" height="300" viewBox="0 0 260 320">
+          <g transform="translate(10,10)scale(0.90,0.92)">
+
+          <!-- base shadow -->
+          <ellipse cx="130" cy="310" rx="70" ry="12" fill="rgba(0,0,0,.3)"/>
+
+          <!-- MATCHED BUILDER SHAPE -->
+          <path d="M50 130 Q55 30 130 20 Q205 30 210 130
+                   L200 280 Q165 300 130 300
+                   Q95 300 60 280 Z"
+                fill="#5A3E2B"/>
+
+          <!-- seam curve -->
+          <path d="M50 130 Q55 30 130 20 Q205 30 210 130"
+                fill="none"
+                stroke="#B89B5E"
+                stroke-width="2"
+                opacity=".9"/>
+
+          <!-- badge circle -->
+          <circle cx="130" cy="90" r="24"
+                  fill="#B89B5E"
+                  opacity=".18"
+                  stroke="#B89B5E"
+                  stroke-width="1.2"/>
+
+          <!-- label -->
+          <text x="130" y="98"
+                text-anchor="middle"
+                font-family="Cormorant Garamond,serif"
+                font-size="16"
+                fill="#B89B5E"
+                font-weight="600">W</text>
+
+        </svg>
+
+      </div>
+
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <div class="card-tag">Head Cover</div>
+        <div class="card-title">Fairway Wood</div>
+        <div class="card-price">From R 200</div>
+        <div class="card-btn">View Details →</div>
+      </div>
+    </div>
+
+    <!-- HYBRID -->
+    <div class="collection-card reveal" onclick="openQuickView('hybrid')">
+      <div class="card-img-placeholder" style="background:linear-gradient(145deg,#161922,#24313a,#1c292d);">
+
+        <svg width="210" height="280" viewBox="0 0 260 320">
+          <g transform="translate(12,12)scale(0.82,0.90)">
+
+          <!-- base shadow -->
+          <ellipse cx="130" cy="310" rx="70" ry="12" fill="rgba(0,0,0,.3)"/>
+
+          <!-- MATCHED BUILDER SHAPE -->
+          <path d="M50 130 Q55 30 130 20 Q205 30 210 130
+                   L200 280 Q165 300 130 300
+                   Q95 300 60 280 Z"
+                fill="#5A3E2B"/>
+
+          <!-- seam curve -->
+          <path d="M50 130 Q55 30 130 20 Q205 30 210 130"
+                fill="none"
+                stroke="#B89B5E"
+                stroke-width="2"
+                opacity=".9"/>
+
+          <!-- badge circle -->
+          <circle cx="130" cy="90" r="24"
+                  fill="#B89B5E"
+                  opacity=".18"
+                  stroke="#B89B5E"
+                  stroke-width="1.2"/>
+
+          <!-- label -->
+          <text x="130" y="98"
+                text-anchor="middle"
+                font-family="Cormorant Garamond,serif"
+                font-size="16"
+                fill="#B89B5E"
+                font-weight="600">H</text>
+
+        </svg>
+
+      </div>
+
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <div class="card-tag">Head Cover</div>
+        <div class="card-title">Hybrid Cover</div>
+        <div class="card-price">From R 150</div>
+        <div class="card-btn">View Details →</div>
+      </div>
+    </div>
+
+    <!-- FULL SET -->
+    <div class="collection-card reveal" onclick="openQuickView('fullset')">
+      <div class="card-img-placeholder" style="background:linear-gradient(145deg,#2a1f14,#3d2e1c,#3a1c0b);">
+
+<svg width="300" height="190" viewBox="0 0 300 190">
+
+  <!-- DRIVER -->
+  <g transform="translate(0,0) scale(1.25)">
+    
+    <!-- shadow -->
+    <ellipse cx="40" cy="150" rx="26" ry="5" fill="rgba(0,0,0,.25)"/>
+
+    <!-- body -->
+    <path d="M12 78 
+             Q18 18 40 15 
+             Q62 18 66 78
+             L62 138
+             Q52 150 40 150
+             Q28 150 18 138 Z"
+          fill="#5A3E2B"
+          opacity=".85"/>
+
+    <!-- seam -->
+    <path d="M12 78 
+             Q18 18 40 15 
+             Q62 18 66 78"
+          fill="none"
+          stroke="#B89B5E"
+          stroke-width="1.5"
+          opacity=".9"/>
+
+    <!-- badge -->
+    <circle cx="40" cy="62" r="10"
+            fill="#B89B5E"
+            opacity=".18"
+            stroke="#B89B5E"
+            stroke-width="1"/>
+
+    <!-- label -->
+    <text x="40" y="66"
+          text-anchor="middle"
+          font-family="Cormorant Garamond,serif"
+          font-size="10"
+          fill="#B89B5E"
+          font-weight="600">D</text>
+
+  </g>
+
+  <!-- 3 WOOD -->
+  <g transform="translate(92,10) scale(1.12)">
+
+    <ellipse cx="40" cy="150" rx="24" ry="5" fill="rgba(0,0,0,.22)"/>
+
+    <path d="M14 80
+             Q20 24 40 20
+             Q60 24 64 80
+             L60 136
+             Q52 148 40 148
+             Q28 148 20 136 Z"
+          fill="#1a242e"
+          opacity=".75"/>
+
+    <path d="M14 80
+             Q20 24 40 20
+             Q60 24 64 80"
+          fill="none"
+          stroke="#F5F1E8"
+          stroke-width="1.4"
+          opacity=".8"/>
+
+    <circle cx="40" cy="62" r="9"
+            fill="#F5F1E8"
+            opacity=".12"
+            stroke="#F5F1E8"
+            stroke-width=".8"/>
+
+    <text x="40" y="66"
+          text-anchor="middle"
+          font-family="Cormorant Garamond,serif"
+          font-size="9"
+          fill="#F5F1E8"
+          font-weight="600">3W</text>
+
+  </g>
+
+  <!-- 5 WOOD -->
+  <g transform="translate(170,18) scale(1.0)">
+
+    <ellipse cx="40" cy="150" rx="22" ry="4.5" fill="rgba(0,0,0,.22)"/>
+
+    <path d="M14 80
+             Q20 24 40 20
+             Q60 24 64 80
+             L60 136
+             Q52 148 40 148
+             Q28 148 20 136 Z"
+          fill="#1a242e"
+          opacity=".75"/>
+
+    <path d="M14 80
+             Q20 24 40 20
+             Q60 24 64 80"
+          fill="none"
+          stroke="#B89B5E"
+          stroke-width="1.3"
+          opacity=".9"/>
+
+    <circle cx="40" cy="62" r="8"
+            fill="#B89B5E"
+            opacity=".15"
+            stroke="#B89B5E"
+            stroke-width=".8"/>
+
+    <text x="40" y="66"
+          text-anchor="middle"
+          font-family="Cormorant Garamond,serif"
+          font-size="8"
+          fill="#B89B5E"
+          font-weight="600">3W</text>
+
+  </g>
+
+  <!-- HYBRID -->
+  <g transform="translate(228,28) scale(0.88,0.94)">
+
+    <ellipse cx="40" cy="150" rx="20" ry="4" fill="rgba(0,0,0,.2)"/>
+
+    <path d="M18 84
+             Q24 34 40 30
+             Q56 34 60 84
+             L56 130
+             Q49 140 40 140
+             Q31 140 24 130 Z"
+          fill="#5A3E2B"
+          opacity=".82"/>
+
+    <path d="M18 84
+             Q24 34 40 30
+             Q56 34 60 84"
+          fill="none"
+          stroke="#B89B5E"
+          stroke-width="1.2"
+          opacity=".9"/>
+
+    <circle cx="40" cy="62" r="7"
+            fill="#B89B5E"
+            opacity=".14"
+            stroke="#B89B5E"
+            stroke-width=".7"/>
+
+    <text x="40" y="66"
+          text-anchor="middle"
+          font-family="Cormorant Garamond,serif"
+          font-size="7"
+          fill="#B89B5E"
+          font-weight="600">HY</text>
+
+  </g>
+
+</svg>
+
+      </div>
+
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <div class="card-tag">Complete Collection</div>
+        <div class="card-title">Full Set</div>
+        <div class="card-price">From R 750</div>
+        <div class="card-btn">View Details →</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+  <!-- PROCESS -->
+  <section id="process">
+    <div style="text-align:center;margin-bottom:1rem;">
+      <div class="section-label reveal" style="justify-content:center;"><span style="display:block;width:2rem;height:1px;background:var(--gold);"></span>How It Works</div>
+      <h2 class="section-h2 reveal" style="text-align:center;">From <em>Concept</em> to Clubhouse</h2>
+    </div>
+    <div class="process-timeline">
+      <div class="process-step reveal"><div class="process-icon">💬<div class="process-num">1</div></div><div><div class="process-title">Get in Touch</div><div class="process-desc">Reach out via WhatsApp or our inquiry form with your vision.</div></div></div>
+      <div class="process-step reveal"><div class="process-icon">🎨<div class="process-num">2</div></div><div><div class="process-title">Choose Your Style</div><div class="process-desc">Select colours, patterns, stitching, and any special details.</div></div></div>
+      <div class="process-step reveal"><div class="process-icon">✅<div class="process-num">3</div></div><div><div class="process-title">Confirm Materials</div><div class="process-desc">We finalise your design proof and material selection together.</div></div></div>
+      <div class="process-step reveal"><div class="process-icon">🧵<div class="process-num">4</div></div><div><div class="process-title">We Craft It</div><div class="process-desc">Each cover is handmade with care. Typically 5–7 business days.</div></div></div>
+      <div class="process-step reveal"><div class="process-icon">📦<div class="process-num">5</div></div><div><div class="process-title">Collect or Deliver</div><div class="process-desc">Collect from Johannesburg or receive nationwide delivery.</div></div></div>
+    </div>
+  </section>
+
+  <!-- CRAFTSMANSHIP -->
+  <section id="craftsmanship">
+    <div class="craft-grid">
+      <div class="craft-content">
+        <div class="section-label" style="color:var(--gold);">Materials &amp; Craftsmanship</div>
+        <h2 class="section-h2 reveal">Built to Last,<br>Made to Impress</h2>
+        <p class="section-p reveal">Every Fusion Golf head cover is constructed from premium synthetic leather, chosen for its durability, texture, and luxury feel. Each piece is individually crafted with precision and an obsessive attention to detail.</p>
+        <div class="craft-features reveal">
+          <div class="craft-feature"><div class="craft-feature-icon">✂️</div><div class="craft-feature-title">Precision Construction</div><div class="craft-feature-desc">Each cover is carefully cut and crafted to exacting standards.</div></div>
+          <div class="craft-feature"><div class="craft-feature-icon">🧴</div><div class="craft-feature-title">Premium Synthetic Leather</div><div class="craft-feature-desc">Soft-touch, weather-resistant, and built to look great round after round.</div></div>
+          <div class="craft-feature"><div class="craft-feature-icon">🤍</div><div class="craft-feature-title">Soft Fleece Lining</div><div class="craft-feature-desc">A plush fleece interior keeps your clubhead protected and scratch-free.</div></div>
+          <div class="craft-feature"><div class="craft-feature-icon">🎯</div><div class="craft-feature-title">Precision Fit</div><div class="craft-feature-desc">Engineered to fit modern driver heads snugly and securely.</div></div>
+        </div>
+      </div>
+      <div class="craft-visual reveal">
+        <div class="craft-img-block"><div class="craft-img-placeholder" style="background:linear-gradient(135deg,#0d1f18,#0B1F3A,#2a3e4a);"><div style="text-align:center;color:rgba(245,241,232,.3);"><div style="font-size:3rem;margin-bottom:.5rem;">🏌️</div><div style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;">Detail Shot</div></div></div></div>
+        <div class="craft-img-block"><div class="craft-img-placeholder" style="background:linear-gradient(135deg,#2e1f0d,#5A3E2B,#4a3020);"><div style="text-align:center;color:rgba(245,241,232,.3);"><div style="font-size:2.5rem;margin-bottom:.5rem;">🪡</div><div style="font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;">Stitching</div></div></div></div>
+        <div class="craft-img-block"><div class="craft-img-placeholder" style="background:linear-gradient(135deg,#161722,#2c484a,#24313a);"><div style="text-align:center;color:rgba(245,241,232,.3);"><div style="font-size:2.5rem;margin-bottom:.5rem;">⛳</div><div style="font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;">On the Course</div></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="section-label reveal">Gallery</div>
+    <h2 class="section-h2 reveal">The <em>Craft</em> in Detail</h2>
+    <div class="gallery-masonry">
+      <div class="gallery-item reveal"><div class="gallery-item-img" style="background:linear-gradient(145deg,#0B1F3A,#1E3A5F);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;font-size:4rem;">🏌️‍♂️</div><div class="gallery-overlay"><div class="gallery-plus">+</div></div></div>
+      <div class="gallery-item reveal"><div class="gallery-item-img" style="background:linear-gradient(145deg,#5A3E2B,#8B6040);aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:3rem;">⛳</div><div class="gallery-overlay"><div class="gallery-plus">+</div></div></div>
+      <div class="gallery-item reveal"><div class="gallery-item-img" style="background:linear-gradient(145deg,#B89B5E,#8a7040);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:3rem;">🎨</div><div class="gallery-overlay"><div class="gallery-plus">+</div></div></div>
+      <div class="gallery-item reveal"><div class="gallery-item-img" style="background:linear-gradient(145deg,#2a3520,#4a5a38);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:3rem;">🧵</div><div class="gallery-overlay"><div class="gallery-plus">+</div></div></div>
+      <div class="gallery-item reveal"><div class="gallery-item-img" style="background:linear-gradient(145deg,#1A1A1A,#333);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;font-size:4rem;">🏆</div><div class="gallery-overlay"><div class="gallery-plus">+</div></div></div>
+      <div class="gallery-item reveal"><div class="gallery-item-img" style="background:linear-gradient(145deg,#3A2010,#7a5030);aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:3rem;">✂️</div><div class="gallery-overlay"><div class="gallery-plus">+</div></div></div>
+      <div class="gallery-item reveal"><div class="gallery-item-img" style="background:linear-gradient(145deg,#242d1c,#3a4a2c);aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:3rem;">🌿</div><div class="gallery-overlay"><div class="gallery-plus">+</div></div></div>
+      <div class="gallery-item reveal"><div class="gallery-item-img" style="background:linear-gradient(145deg,#2c3e6e,#1a2845);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:3rem;">⭐</div><div class="gallery-overlay"><div class="gallery-plus">+</div></div></div>
+      <div class="gallery-item reveal"><div class="gallery-item-img" style="background:linear-gradient(145deg,#8B1a1a,#5a1010);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;font-size:4rem;">💎</div><div class="gallery-overlay"><div class="gallery-plus">+</div></div></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="testimonials-header">
+      <div class="section-label">What Golfers Say</div>
+      <h2 class="section-h2">Loved by <em>Players</em><br>Across South Africa</h2>
+    </div>
+    <div class="testimonials-track-wrap"><div class="testimonials-track" id="testimonialTrack">
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><div class="testimonial-text">"The quality is absolutely incredible. My Driver cover has received compliments on every course I've played. Can't recommend Fusion Golf enough — truly a premium product."</div><div class="testimonial-author"><div class="testimonial-avatar">TM</div><div><div class="testimonial-name">Thabo M.</div><div class="testimonial-location">Johannesburg, SA</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><div class="testimonial-text">"I ordered a full set — driver, three woods, and hybrid. The craftsmanship is extraordinary for the price. They look and feel like they cost three times more."</div><div class="testimonial-author"><div class="testimonial-avatar">RV</div><div><div class="testimonial-name">Riaan V.</div><div class="testimonial-location">Pretoria, SA</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><div class="testimonial-text">"The custom builder was so fun to use. Got exactly what I envisioned — dark green shell with gold stitching. The attention to detail is remarkable."</div><div class="testimonial-author"><div class="testimonial-avatar">KS</div><div><div class="testimonial-name">Karen S.</div><div class="testimonial-location">Cape Town, SA</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><div class="testimonial-text">"Ordered as a gift for my dad's birthday. He was blown away. The packaging, the quality, and the personal touch made it unforgettable. Will order again."</div><div class="testimonial-author"><div class="testimonial-avatar">BN</div><div><div class="testimonial-name">Bongani N.</div><div class="testimonial-location">Durban, SA</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><div class="testimonial-text">"These covers elevate my bag to another level. Affordable but looking absolutely priceless — exactly what the tagline says. Five stars without hesitation."</div><div class="testimonial-author"><div class="testimonial-avatar">MD</div><div><div class="testimonial-name">Marco D.</div><div class="testimonial-location">Johannesburg, SA</div></div></div></div>
+    </div></div>
+    <div class="testimonial-controls"><button class="t-btn" onclick="slideTestimonials(-1)">←</button><button class="t-btn" onclick="slideTestimonials(1)">→</button></div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div style="max-width:800px;margin:0 auto;">
+      <div class="section-label reveal">FAQ</div>
+      <h2 class="section-h2 reveal">Frequently Asked <em>Questions</em></h2>
+      <div class="faq-grid reveal" style="margin-top:2rem;">
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-text">How long does an order take?</div><div class="faq-toggle">+</div></div><div class="faq-a">Most orders are completed within 5–7 business days from confirmation. Rush orders may be available — contact us to discuss your timeline.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-text">Do you deliver nationwide?</div><div class="faq-toggle">+</div></div><div class="faq-a">Yes! We offer nationwide delivery across South Africa. You can also collect from our workshop in Johannesburg. Delivery costs depend on your location.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-text">Can I fully customise my cover?</div><div class="faq-toggle">+</div></div><div class="faq-a">Absolutely. You can customise shell colour, trim, lining, numbering, patterns, and even add sports badges or logos. The builder shows some options — contact us for full custom requests.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-text">What materials do you use?</div><div class="faq-toggle">+</div></div><div class="faq-a">We use premium synthetic leather for the outer shell — weather-resistant, soft-touch, and durable. The inner lining is soft fleece to protect your clubhead.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-text">Do you do bulk / club orders?</div><div class="faq-toggle">+</div></div><div class="faq-a">Yes! We offer pricing for golf clubs, corporate gifts, and team orders. Get in touch with your requirements and we'll provide a custom quote.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><div class="faq-q-text">How do I place an order?</div><div class="faq-toggle">+</div></div><div class="faq-a">Click any cover, choose "Build Your Own", design your cover, then send your order via WhatsApp. We'll confirm details and pricing before proceeding.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-grid">
+      <div class="contact-content">
+        <div class="section-label" style="color:var(--gold);">Get In Touch</div>
+        <h2 class="section-h2 reveal">Ready to Build Your<br><em>Perfect Set?</em></h2>
+        <p class="section-p reveal">Based in Johannesburg &amp; serving golfers across South Africa. Reach out and let's create something special together.</p>
+        <div class="contact-info reveal">
+          <div class="contact-info-item"><div class="contact-info-icon">📍</div><span>Johannesburg / Pretoria, South Africa</span></div>
+          <div class="contact-info-item"><div class="contact-info-icon">📱</div><span>064 533 1129</span></div>
+          <div class="contact-info-item"><div class="contact-info-icon">📦</div><span>Nationwide delivery available</span></div>
+          <div class="contact-info-item"><div class="contact-info-icon">⏱️</div><span>Production takes 5–7 business days and delivery can be arranged after this period.</span></div>
+        </div>
+        <div class="contact-social reveal">
+          <a class="social-btn whatsapp" href="https://wa.me/27645331129?text=Hi%20Fusion%20Golf!%20I'd%20love%20to%20order%20some%20custom%20head%20covers." target="_blank"><span>💬</span> WhatsApp Us</a>
+          <a class="social-btn instagram" href="https://instagram.com/fusion.golf" target="_blank"><span>📸</span> @fusion.golf</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">First Name</label><input class="form-input" id="cFirstName" type="text" placeholder="Your name"></div>
+            <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" id="cLastName" type="text" placeholder="Last name"></div>
+          </div>
+          <div class="form-group"><label class="form-label">WhatsApp</label><input class="form-input" id="cContact" type="text" placeholder="+27..."></div>
+          <div class="form-group"><label class="form-label">I'm Interested In</label>
+            <select class="form-select" id="cType">
+              <option value="">Select cover type</option>
+              <option>Driver Cover</option><option>Fairway Wood Cover</option>
+              <option>Hybrid Cover</option><option>Full Set (Driver + Woods + Hybrid)</option>
+              <option>Custom / Corporate Order</option><option>Gift Set</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Tell Us About Your Design</label><textarea class="form-textarea" id="cMsg" placeholder="Describe your colour choices, style preferences, or any special requests..."></textarea></div>
+          <button class="form-submit" onclick="submitInquiry()">Send Inquiry via WhatsApp →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Fusion<span>.</span>Golf</div>
+        <div style="font-size:.72rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.8rem;">Premium Handmade Head Covers</div>
+        <div class="footer-tagline">"Affordable covers with a priceless look." Handcrafted in South Africa with care and precision.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Collections</div>
+        <ul class="footer-links"><li><a onclick="openQuickView('driver')">Driver Covers</a></li><li><a onclick="openQuickView('wood')">Fairway Wood</a></li><li><a onclick="openQuickView('hybrid')">Hybrid Covers</a></li><li><a onclick="openQuickView('fullset')">Full Set</a></li></ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links"><li><a href="#process">Our Process</a></li><li><a href="#craftsmanship">Materials</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#faq">FAQ</a></li></ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links"><li><a href="https://wa.me/27645331129" target="_blank">WhatsApp</a></li><li><a href="https://instagram.com/fusion.golf" target="_blank">@fusion.golf</a></li><li><a href="#contact">Inquiry Form</a></li><li><a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 <span>Fusion Golf</span>. All rights reserved. Handmade in South Africa.</div>
+      <div class="footer-copy">Designed with care · Built for golfers</div>
+    </div>
+  </footer>
+</div><!-- /homepageView -->
+
+<!-- ===================== BUILDER PAGE ===================== -->
+<div id="builderView" class="view">
+  <div id="builderPage">
+    <div class="builder-header">
+      <div class="builder-breadcrumb" onclick="showHomepage()">← Back to Collections</div>
+      <h1 id="builderTitle">Design Your <em>Cover</em></h1>
+      <p id="builderSubtitle">Customise every detail and bring your perfect cover to life.</p>
+    </div>
+
+    <!-- Stepper -->
+    <div class="builder-stepper" id="builderStepper">
+      <div class="step-pill active" data-step="1"><span>1</span>Start</div>
+      <div class="step-pill" data-step="2"><span>2</span>Customise</div>
+      <div class="step-pill" data-step="3"><span>3</span>Review</div>
+    </div>
+
+    <div class="builder-content">
+
+      <!-- === STEP 1: Choose action (shop or build) === -->
+      <div class="bstep active" id="bstep1">
+        <!-- Set match / each sub-step (only for fullset build) -->
+        <div id="fsStep" style="display:none;margin-bottom:2rem;">
+          <div class="config-label" style="color:rgba(245,241,232,.45);margin-bottom:1rem;">Your full set — how do you want to customise?</div>
+          <div class="mode-grid">
+            <div class="mode-card" id="fsCardMatch" onclick="chooseFullsetMode('same')"><div class="mode-icon">◇</div><div class="mode-name">All Matching</div><div class="mode-tag">One design applied to all four covers in the set</div></div>
+            <div class="mode-card" id="fsCardEach" onclick="chooseFullsetMode('each')"><div class="mode-icon">✦</div><div class="mode-name">Customise Each</div><div class="mode-tag">Design every cover individually — Driver, 5W, 3W, Hybrid</div></div>
+          </div>
+          <div style="margin-top:.8rem;font-size:.72rem;color:rgba(245,241,232,.35);text-align:left;">Set order: Driver → 5 Wood → 3 Wood → Hybrid</div>
+        </div>
+
+        <!-- Shop designs section -->
+        <div id="shopSection" style="display:none;">
+          <div class="shop-placeholder">
+            <h3>Premade designs coming soon</h3>
+            <p>We're putting the finishing touches on our gallery of ready-made designs. In the meantime, use the interactive builder or send us your idea on WhatsApp.</p>
+            <div class="shop-placeholder-actions">
+              <button class="config-btn-outline" style="width:auto;" onclick="showHomepage()">← Back</button>
+              <button class="config-btn-primary" style="width:auto;" onclick="switchToBuild()">Build Your Own →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Continue button for build flow -->
+        <div id="buildContinueWrap" style="display:none;margin-top:1.5rem;">
+          <button class="config-btn-primary" style="max-width:280px;" onclick="startCustomising()">Start Customising →</button>
+        </div>
+      </div>
+
+      <!-- === STEP 2: Customise === -->
+      <div class="bstep" id="bstep2">
+        <div class="customise-progress" id="customiseProgress"></div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar"></div></div>
+
+        <div class="configurator-wrap">
+          <!-- Preview -->
+          <div class="config-preview">
+            <div class="config-canvas">
+              <!-- Classic -->
+              <svg id="svgClassic" class="headcover-svg" viewBox="0 0 260 320" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="130" cy="310" rx="70" ry="12" fill="rgba(0,0,0,.3)"/>
+                <path id="coverBody" d="M50 130 Q55 30 130 20 Q205 30 210 130 L200 280 Q165 300 130 300 Q95 300 60 280 Z" fill="#5A3E2B"/>
+                <text class="cv-number" id="classicNumber" x="130" y="70" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="34" fill="#F5F1E8" font-weight="600" opacity="0"></text>
+                <text class="cv-initials" id="classicInitials" x="130" y="250" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="22" fill="#F5F1E8" font-weight="600" letter-spacing="3" opacity="0"></text>
+              </svg>
+              <!-- Old Fashioned -->
+              <svg id="svgOldFashioned" class="headcover-svg" viewBox="0 0 260 320" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+                <defs><pattern id="osDiamonds" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M0 0 L28 28" stroke="#B89B5E" stroke-width="1.1" opacity=".55"/><path d="M28 0 L0 28" stroke="#B89B5E" stroke-width="1.1" opacity=".55"/></pattern></defs>
+                <ellipse cx="130" cy="310" rx="70" ry="12" fill="rgba(0,0,0,.3)"/>
+                <path id="osBody" d="M50 130 Q55 30 130 20 Q205 30 210 130 L200 280 Q165 300 130 300 Q95 300 60 280 Z" fill="#0B1F3A"/>
+                <clipPath id="bodyClip"><path d="M50 130 Q55 30 130 20 Q205 30 210 130 L200 280 Q165 300 130 300 Q95 300 60 280 Z"/></clipPath>
+                <g clip-path="url(#bodyClip)"><rect x="0" y="0" width="260" height="320" id="osPatternFill" fill="url(#osDiamonds)"/></g>
+                <text class="cv-number" id="osNumber" x="130" y="70" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="34" fill="#F5F1E8" font-weight="700" opacity="0" style="paint-order:stroke;stroke:#1a1a1a;stroke-width:2;"></text>
+                <text class="cv-initials" id="osInitials" x="130" y="250" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="22" fill="#F5F1E8" font-weight="700" letter-spacing="3" opacity="0" style="paint-order:stroke;stroke:#1a1a1a;stroke-width:2;"></text>
+              </svg>
+              <!-- Retro Stripe -->
+              <svg id="svgRetroStripe" class="headcover-svg" viewBox="0 0 260 320" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+                <ellipse cx="130" cy="310" rx="70" ry="12" fill="rgba(0,0,0,.3)"/>
+                <path id="rsBody" d="M50 130 Q55 30 130 20 Q205 30 210 130 L200 280 Q165 300 130 300 Q95 300 60 280 Z" fill="#1a2e6e"/>
+                <clipPath id="rsClip"><path d="M50 130 Q55 30 130 20 Q205 30 210 130 L200 280 Q165 300 130 300 Q95 300 60 280 Z"/></clipPath>
+                <g clip-path="url(#rsClip)">
+                  <rect x="0" y="20" width="260" height="38" id="rsTopStripe1" fill="#B89B5E" opacity=".9"/>
+                  <rect x="0" y="58" width="260" height="14" id="rsTopStripe2" fill="#F5F1E8" opacity=".85"/>
+                  <rect x="0" y="255" width="260" height="18" id="rsBottomStripe1" fill="#F5F1E8" opacity=".85"/>
+                  <rect x="0" y="273" width="260" height="30" id="rsBottomStripe2" fill="#B89B5E" opacity=".9"/>
+                </g>
+                <text class="cv-number" id="rsNumber" x="130" y="170" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="34" fill="#F5F1E8" font-weight="600" opacity="0"></text>
+                <text class="cv-initials" id="rsInitials" x="130" y="220" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="22" fill="#F5F1E8" font-weight="600" letter-spacing="3" opacity="0"></text>
+              </svg>
+              <!-- Pin Stripe -->
+              <svg id="svgVertical" class="headcover-svg" viewBox="0 0 260 320" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+                <ellipse cx="130" cy="310" rx="70" ry="12" fill="rgba(0,0,0,.3)"/>
+                <path id="vsBody" d="M50 130 Q55 30 130 20 Q205 30 210 130 L200 280 Q165 300 130 300 Q95 300 60 280 Z" fill="#F5F1E8"/>
+                <clipPath id="vsClip"><path d="M50 130 Q55 30 130 20 Q205 30 210 130 L200 280 Q165 300 130 300 Q95 300 60 280 Z"/></clipPath>
+                <g clip-path="url(#vsClip)">
+                  <rect x="98" y="0" width="14" height="320" id="vsStripeL" fill="#c0392b" opacity=".92"/>
+                  <rect x="148" y="0" width="14" height="320" id="vsStripeR" fill="#c0392b" opacity=".92"/>
+                  <rect x="115" y="0" width="3" height="320" id="vsStripeLInner" fill="#F5F1E8" opacity=".85" display="none"/>
+                  <rect x="142" y="0" width="3" height="320" id="vsStripeRInner" fill="#F5F1E8" opacity=".85" display="none"/>
+                </g>
+                <text class="cv-number" id="vsNumber" x="130" y="70" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="34" fill="#1A1A1A" font-weight="600" opacity="0"></text>
+                <text class="cv-initials" id="vsInitials" x="130" y="250" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="22" fill="#1A1A1A" font-weight="600" letter-spacing="3" opacity="0"></text>
+              </svg>
+              
+              <div class="config-template-name" id="templateNameDisplay">Classic</div>
+              <div class="current-cover-tag" id="currentCoverTag"></div>
+            </div>
+          </div>
+
+          <!-- Controls panel -->
+          <div class="config-panel">
+            <!-- Style -->
+            <div class="config-section">
+<div class="config-label">Choose Your Style</div>
+
+<div id="stylePriceGuide"
+     style="
+       margin-bottom:1rem;
+       color:#8A7038;
+       font-size:.8rem;
+       line-height:1.6;
+       font-weight:600;">
+</div>              <div class="template-grid">
+                <div class="template-card active" onclick="applyStyle('Classic',this)"><div style="font-size:1.6rem;margin-bottom:.4rem;">▢</div><div class="template-card-name">Classic</div><div class="template-card-tag">Plain &amp; refined</div></div>
+                <div class="template-card" onclick="applyStyle('Old Fashioned',this)"><div style="font-size:1.6rem;margin-bottom:.4rem;">◇</div><div class="template-card-name">Old Fashioned</div><div class="template-card-tag">Diamond cross-hatch</div></div>
+                <div class="template-card" onclick="applyStyle('Retro Stripe',this)"><div style="font-size:1.6rem;margin-bottom:.4rem;">▬</div><div class="template-card-name">Retro Stripe</div><div class="template-card-tag">Stripes top &amp; bottom</div></div>
+                <div class="template-card" onclick="applyStyle('Pin Stripe',this)"><div style="font-size:1.6rem;margin-bottom:.4rem;">▮▮</div><div class="template-card-name">Pin Stripe</div><div class="template-card-tag">Two stripes on front</div></div>
+              </div>
+            </div>
+
+            <!-- Shell colour -->
+            <div class="config-section">
+              <div class="config-label">Shell Colour</div>
+              <div class="color-swatches" id="shellSwatches"></div>
+            </div>
+
+            <!-- Trim colour -->
+            <div class="config-section">
+              <div class="config-label">Trim &amp; Stripe Colour</div>
+              <div class="color-swatches" id="trimSwatches"></div>
+            </div>
+
+            <!-- Secondary stripe (stripe styles only) -->
+            <div class="config-section" id="secondaryStripeSection" style="display:none;">
+              <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.7rem;">
+                <input type="checkbox" id="toggleSecondary" onchange="toggleSecondaryStripe(this)" style="accent-color:#B89B5E;width:16px;height:16px;">
+                <label for="toggleSecondary" style="font-size:.75rem;color:rgba(245,241,232,.7);cursor:pointer;">Use a second stripe colour</label>
+              </div>
+              <div id="secondarySwatches" class="color-swatches" style="display:none;"></div>
+            </div>
+
+            <!-- Personalisation -->
+            <div class="config-section">
+              <div class="config-label">Personalisation <span style="color:rgba(184,155,94,.5);font-size:.6rem;margin-left:.4rem;">— additional cost</span></div>
+
+              <!-- Number -->
+              <div style="margin-bottom:1.2rem;">
+                <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;margin-bottom:.6rem;"><input type="checkbox" id="toggleNumber" onchange="toggleNumberExtra(this)" style="accent-color:#B89B5E;width:16px;height:16px;"><span style="font-size:.75rem;color:rgba(245,241,232,.7);">Add club number</span></label>
+                <div id="numberOptions" style="display:none;">
+                  <div class="config-tabs" id="numberTabs">
+                    <button class="config-tab active" onclick="setNumber('1',this)">1</button>
+                    <button class="config-tab" onclick="setNumber('3',this)">3</button>
+                    <button class="config-tab" onclick="setNumber('5',this)">5</button>
+                    <button class="config-tab" onclick="setNumber('7',this)">7</button>
+                    <button class="config-tab" onclick="setNumber('H',this)">H</button>
+                    <button class="config-tab" onclick="setNumber('P',this)">P</button>
+                  </div>
+                  <div style="font-size:.65rem;color:rgba(245,241,232,.4);margin:.7rem 0 .4rem;letter-spacing:.1em;text-transform:uppercase;">Position</div>
+                  <div class="config-tabs" id="numberPosTabs">
+                    <button class="config-tab active" onclick="setNumberPos('top',this)">Top</button>
+                    <button class="config-tab" onclick="setNumberPos('middle',this)">Middle</button>
+                    <button class="config-tab" onclick="setNumberPos('bottom',this)">Bottom</button>
+                  </div>
+                  <div style="font-size:.65rem;color:rgba(245,241,232,.4);margin:.7rem 0 .4rem;letter-spacing:.1em;text-transform:uppercase;">Number Colour</div>
+                  <div class="color-swatches" id="numberColorSwatches"></div>
+                </div>
+              </div>
+
+              <!-- Initials -->
+              <div>
+                <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;margin-bottom:.6rem;"><input type="checkbox" id="toggleInitials" onchange="toggleInitialsExtra(this)" style="accent-color:#B89B5E;width:16px;height:16px;"><span style="font-size:.75rem;color:rgba(245,241,232,.7);">Add my initials</span></label>
+                <div id="initialsOptions" style="display:none;">
+                  <input id="initialsInput" type="text" maxlength="3" placeholder="e.g. JD" oninput="setInitials(this.value)" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:#F5F1E8;padding:.5rem .8rem;font-family:'Cormorant Garamond',serif;font-size:1rem;width:100%;outline:none;letter-spacing:.1em;text-transform:uppercase;">
+                  <div style="font-size:.65rem;color:rgba(245,241,232,.4);margin:.7rem 0 .4rem;letter-spacing:.1em;text-transform:uppercase;">Position</div>
+                  <div class="config-tabs" id="initialsPosTabs">
+                    <button class="config-tab" onclick="setInitialsPos('top',this)">Top</button>
+                    <button class="config-tab" onclick="setInitialsPos('middle',this)">Middle</button>
+                    <button class="config-tab active" onclick="setInitialsPos('bottom',this)">Bottom</button>
+                  </div>
+                  <div style="font-size:.65rem;color:rgba(245,241,232,.4);margin:.7rem 0 .4rem;letter-spacing:.1em;text-transform:uppercase;">Initials Colour</div>
+                  <div class="color-swatches" id="initialsColorSwatches"></div>
+                  <div style="font-size:.65rem;color:rgba(245,241,232,.3);margin-top:.5rem;">Up to 3 characters · Number and initials can appear together</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Nav -->
+            <div class="config-section customise-nav">
+              <button class="config-btn-outline" onclick="prevCover()" id="prevCoverBtn">← Back</button>
+              <button class="config-btn-primary" onclick="saveCurrentAndNext()" id="nextCoverBtn">Save &amp; Next →</button>
+            </div>
+
+            <!-- Dream box -->
+            <div class="dream-box">
+              <div class="dream-title">Have something unique in mind?</div>
+              <div class="dream-desc">Our configurator shows just a taste of what's possible. If you can dream it, we can craft it.</div>
+              <button class="dream-toggle-btn" onclick="toggleDreamBox()">Describe Your Dream Cover →</button>
+              <div id="dreamBox" style="display:none;margin-top:1.2rem;">
+                <textarea id="dreamText" placeholder="Tell us your idea — colours, patterns, logos, style inspiration..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:#F5F1E8;padding:.7rem .9rem;font-family:'Poppins',sans-serif;font-size:.78rem;line-height:1.6;resize:vertical;min-height:90px;outline:none;"></textarea>
+                <button onclick="sendDreamCover()" style="margin-top:.6rem;width:100%;padding:.75rem;background:var(--gold);border:none;color:var(--black);font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;">Send via WhatsApp →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- === STEP 3: Review === -->
+      <div class="bstep" id="bstep3">
+        <div style="margin-bottom:1.5rem;">
+          <div class="config-label">Your Design — review each cover before ordering</div>
+        </div>
+        <div class="review-grid" id="reviewGrid"></div>
+
+        <div class="checkout-block">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--cream);margin-bottom:.3rem;">Ready to Order?</div>
+          <div style="font-size:.8rem;color:rgba(245,241,232,.5);margin-bottom:1rem;line-height:1.6;">Review your selections above, then checkout via WhatsApp and we'll confirm pricing and details.</div>
+          <div class="cart-form-row"><label>Your Name</label><input id="reviewName" placeholder="Full name"></div>
+          <div class="cart-form-row"><label>WhatsApp / Phone</label><input id="reviewContact" placeholder="+27 or 0..."></div>
+          <div class="cart-form-row"><label>Notes (optional)</label><textarea id="reviewNotes" placeholder="Any extra details..." style="min-height:60px;resize:vertical;"></textarea></div>
+          <button class="checkout-btn" onclick="checkoutNow()">📩 Checkout via WhatsApp</button>
+        </div>
+
+        <div class="review-actions">
+          <button class="config-btn-outline" style="width:auto;" onclick="restartBuilder()">← Start Over</button>
+          <button class="config-btn-primary" style="width:auto;" onclick="addBuildToCart()">Add to Cart</button>
+        </div>
+      </div>
+
+    </div><!-- /builder-content -->
+  </div><!-- /builderPage -->
+
+  <!-- Footer on builder page too -->
+  <footer>
+    <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,.06);padding-top:2rem;">
+      <div class="footer-copy">© 2025 <span>Fusion Golf</span>. All rights reserved.</div>
+      <div class="footer-copy"><a onclick="showHomepage()" style="color:rgba(245,241,232,.4);cursor:pointer;text-decoration:none;">← Back to Homepage</a></div>
+    </div>
+  </footer>
+</div><!-- /builderView -->
+
+<!-- Toast -->
+<div class="cart-toast" id="cartToast"></div>
+
+<script>
+/* ==================== CONSTANTS ==================== */
+const WA_NUMBER = '27645331129';
+const FULLSET_ORDER = ['Driver','5 Wood','3 Wood','Hybrid'];
+const STRIPE_STYLES = new Set(['Retro Stripe','Pin Stripe']);
+const PRICES = {
+  Driver: {
+    "Classic": 250,
+    "Old Fashioned": 280,
+    "Retro Stripe": 300,
+    "Pin Stripe": 300
+  },
+  Wood: {
+    "Classic": 200,
+    "Old Fashioned": 230,
+    "Retro Stripe": 250,
+    "Pin Stripe": 250
+  },
+  Hybrid: {
+    "Classic": 150,
+    "Old Fashioned": 180,
+    "Retro Stripe": 200,
+    "Pin Stripe": 200
+  },
+   "Full Set": {
+    "Classic": 750,
+    "Old Fashioned": 870,
+    "Retro Stripe": 950,
+    "Pin Stripe": 950
+  }
+};
+function getDesignPrice(design) {
+
+  let type = design.coverType;
+
+  if(type.includes('Driver')) type = 'Driver';
+  else if(type.includes('Wood')) type = 'Wood';
+  else if(type.includes('Hybrid')) type = 'Hybrid';
+
+  let price = PRICES[type]?.[design.style] || 0;
+
+  const hasInitials =
+    design.initials &&
+    design.initials.trim() !== '';
+
+  const hasNumber =
+    design.number &&
+    design.number.trim() !== '';
+
+  if(hasInitials && hasNumber){
+    price += 50;
+  }
+  else if(hasInitials || hasNumber){
+    price += 30;
+  }
+
+  return price;
+}
+/* Unified colour palette — same order everywhere */
+const COLOUR_PALETTE = [
+  {hex:'#5A3E2B', name:'Brown'},
+  {hex:'#0B1F3A', name:'Dark Green'},
+  {hex:'#4a8c5c', name:'Light Green'},
+  {hex:'#1a2e6e', name:'Dark Blue'},
+  {hex:'#4a90d9', name:'Light Blue'},
+  {hex:'#1A1A1A', name:'Black'},
+  {hex:'#F5F1E8', name:'White'},
+  {hex:'#B89B5E', name:'Gold'},
+  {hex:'#c0392b', name:'Red'},
+  {hex:'#e67e22', name:'Orange'},
+  {hex:'#f1c40f', name:'Yellow'},
+  {hex:'#e91e8c', name:'Pink'},
+  {hex:'#2C4A3F', name:'Olive'},
+  {hex:'#7f8c8d', name:'Grey'},
+];
+
+const TEXT_COLOUR_PALETTE = [
+  {hex:'#F5F1E8', name:'White'},
+  {hex:'#B89B5E', name:'Gold'},
+  {hex:'#1A1A1A', name:'Black'},
+  {hex:'#5A3E2B', name:'Brown'},
+  {hex:'#0B1F3A', name:'Dark Green'},
+  {hex:'#4a8c5c', name:'Light Green'},
+  {hex:'#1a2e6e', name:'Dark Blue'},
+  {hex:'#4a90d9', name:'Light Blue'},
+  {hex:'#c0392b', name:'Red'},
+  {hex:'#e67e22', name:'Orange'},
+  {hex:'#f1c40f', name:'Yellow'},
+  {hex:'#e91e8c', name:'Pink'},
+];
+
+const STYLE_DEFAULTS = {
+  'Classic': {shell:'#5A3E2B', trim:'#B89B5E'},
+  'Old Fashioned':      {shell:'#0B1F3A', trim:'#B89B5E'},
+  'Retro Stripe':    {shell:'#1a2e6e', trim:'#B89B5E'},
+  'Pin Stripe':      {shell:'#F5F1E8', trim:'#c0392b'},
+};
+const STYLE_SVG_ID = {
+  'Classic':'svgClassic',
+  'Old Fashioned':'svgOldFashioned',
+  'Retro Stripe':'svgRetroStripe',
+  'Pin Stripe':'svgVertical',
+};
+const STYLE_PREFIX = {
+  'Classic':'classic',
+  'Old Fashioned':'os',
+  'Retro Stripe':'rs',
+  'Pin Stripe':'vs',
+};
+/* Y positions for labels per style */
+const LABEL_Y = {
+  'Classic': {top:70, middle:170, bottom:255},
+  'Old Fashioned':      {top:65, middle:170, bottom:270},
+  'Retro Stripe':    {top:105, middle:175, bottom:240},
+  'Pin Stripe':      {top:70, middle:170, bottom:255},
+};
+
+/* ==================== BUILD STATE ==================== */
+const build = {
+  mode: null,         // 'individual' | 'fullset'
+  fullsetMode: null,  // 'same' | 'each'
+  coverType: null,    // single cover type string
+  action: null,       // 'shop' | 'build'
+  queue: [],          // array of cover type strings to customise
+  current: 0,
+  designs: [],        // array of design objects
+};
+
+/* Per-cover state (reset between covers) */
+let currentStyle    = 'Classic';
+let currentShell    = '#5A3E2B';
+let currentTrim     = '#B89B5E';
+let currentSecondary= '#F5F1E8';
+let useSecondary    = false;
+let numberText      = '';
+let numberPos       = 'top';
+let numberColor     = '#F5F1E8';
+let initialsText    = '';
+let initialsPos     = 'bottom';
+let initialsColor   = '#F5F1E8';
+
+/* ==================== QUICK VIEW DATA ==================== */
+const QV_DATA = {
+  driver:  {tag:'Head Cover',         title:'Driver Cover',      price:'From R 250', desc:'Crafted for the big stick. Fits modern oversized driver heads up to 460cc, with a snug fleece-lined interior.', features:['Fits up to 460cc driver heads','Premium synthetic leather outer','Soft fleece inner lining','All 4 styles available','Optional number or initials (+extra)'], styles:'Classic · Old Fashioned · Retro Stripe · Pin Stripe'},
+  wood:    {tag:'Head Cover',         title:'Fairway Wood Cover', price:'From R 200', desc:'Designed for 3, 5, and 7 fairway woods. Same premium construction as our driver cover, scaled for your metals.', features:['Available in 3W, 5W, 7W sizes','Premium synthetic leather outer','Soft fleece inner lining','All 4 styles available','Optional number or initials (+extra)'], styles:'Classic · Old Fashioned · Retro Stripe · Pin Stripe'},
+  hybrid:  {tag:'Head Cover',         title:'Hybrid Cover',       price:'From R 150', desc:'Sleek, compact cover for hybrid and utility clubs. Precise fit, premium feel.', features:['Fits standard hybrid heads','Premium synthetic leather outer','Soft fleece inner lining','All 4 styles available','Optional number or initials (+extra)'], styles:'Classic · Old Fashioned · Retro Stripe · Pin Stripe'},
+  fullset: {tag:'Complete Collection', title:'Full Set',           price:'From R 750', desc:'Driver, 5 Wood, 3 Wood and Hybrid covers as a matching set or each customised individually.', features:['Driver, 5W, 3W & Hybrid included','Match all or design each separately','Premium synthetic leather outer','Soft fleece inner lining','Optional numbers or initials per cover'], styles:'Classic · Old Fashioned · Retro Stripe · Pin Stripe'},
+};
+const COVER_TYPE_MAP = {driver:'Driver', wood:'Fairway Wood', hybrid:'Hybrid', fullset:'__fullset__'};
+
+/* ==================== VIEW SWITCHING ==================== */
+function showHomepage() {
+  document.getElementById('homepageView').classList.add('active');
+  document.getElementById('builderView').classList.remove('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function showBuilderView() {
+  document.getElementById('homepageView').classList.remove('active');
+  document.getElementById('builderView').classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ==================== NAV ==================== */
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav')?.classList.toggle('scrolled', window.scrollY > 60);
+});
+function openMobileNav()  { document.getElementById('mobileNav').classList.add('open'); }
+function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
+
+/* ==================== REVEAL OBSERVER ==================== */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold:0.12, rootMargin:'0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ==================== FAQ ==================== */
+function toggleFaq(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+/* ==================== TESTIMONIALS ==================== */
+let testimonialIndex = 0;
+function slideTestimonials(dir) {
+  const track = document.getElementById('testimonialTrack');
+  const cards = track.querySelectorAll('.testimonial-card');
+  const total = cards.length;
+  testimonialIndex = (testimonialIndex + dir + total) % total;
+  track.style.transform = `translateX(-${testimonialIndex * (cards[0].getBoundingClientRect().width + 24)}px)`;
+}
+
+/* ==================== CONTACT FORM ==================== */
+function submitInquiry() {
+  const name = ((document.getElementById('cFirstName')?.value||'') + ' ' + (document.getElementById('cLastName')?.value||'')).trim();
+  const contact = document.getElementById('cContact')?.value || '';
+  const type = document.getElementById('cType')?.value || 'general enquiry';
+  const msg = document.getElementById('cMsg')?.value || '';
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hi Fusion Golf! My name is ${name}.\nContact: ${contact}\nInterested in: ${type}\n\n${msg}`)}`, '_blank');
+}
+
+/* ==================== QUICK VIEW ==================== */
+function openQuickView(typeKey) {
+  const d = QV_DATA[typeKey];
+  const features = d.features.map(f => `<div class="qv-feature-row"><span>✦</span><span>${f}</span></div>`).join('');
+  document.getElementById('qvContent').innerHTML = `
+    <div class="qv-tag">${d.tag}</div>
+    <div class="qv-title">${d.title}</div>
+    <div class="qv-price">${d.price}</div>
+    <p class="qv-desc">${d.desc}</p>
+    <div class="qv-features">${features}</div>
+    <div class="qv-styles">Available styles: ${d.styles}</div>
+    <div class="qv-actions">
+      <button class="qv-btn-shop" onclick="closeQuickView();launchBuilder('${typeKey}','shop')">🖼 Shop Designs</button>
+      <button class="qv-btn-build" onclick="closeQuickView();launchBuilder('${typeKey}','build')">✦ Build Your Own</button>
+    </div>`;
+  document.getElementById('quickViewModal').classList.add('open');
+}
+function closeQuickView() { document.getElementById('quickViewModal').classList.remove('open'); }
+document.getElementById('quickViewModal').addEventListener('click', function(e) {
+  if (e.target === this) closeQuickView();
+});
+
+/* ==================== BUILDER LAUNCH ==================== */
+function launchBuilder(typeKey, action) {
+  const mappedType = COVER_TYPE_MAP[typeKey];
+  // Set build state
+  build.action = action;
+  if (mappedType === '__fullset__') {
+    build.mode = 'fullset';
+    build.coverType = null;
+  } else {
+    build.mode = 'individual';
+    build.coverType = mappedType;
+  }
+  build.fullsetMode = null;
+  build.queue = [];
+  build.current = 0;
+  build.designs = [];
+
+  // Update header
+  const titleEl = document.getElementById('builderTitle');
+  const subtitleEl = document.getElementById('builderSubtitle');
+  if (build.mode === 'fullset') {
+    titleEl.innerHTML = 'Design Your <em>Full Set</em>';
+    subtitleEl.textContent = 'Customise all four covers your way.';
+  } else {
+    titleEl.innerHTML = `Design Your <em>${build.coverType} Cover</em>`;
+    subtitleEl.textContent = 'Customise every detail and bring your perfect cover to life.';
+  }
+
+  // Show builder
+  showBuilderView();
+  goToBuilderStep(1);
+
+  // Configure step 1 UI
+  const shopSection = document.getElementById('shopSection');
+  const fsStep = document.getElementById('fsStep');
+  const buildContinueWrap = document.getElementById('buildContinueWrap');
+
+  shopSection.style.display = 'none';
+  fsStep.style.display = 'none';
+  buildContinueWrap.style.display = 'none';
+  document.getElementById('fsCardMatch')?.classList.remove('active');
+  document.getElementById('fsCardEach')?.classList.remove('active');
+
+  if (action === 'shop') {
+    shopSection.style.display = '';
+  } else if (action === 'build') {
+    if (build.mode === 'fullset') {
+      fsStep.style.display = '';
+    } else {
+      // Individual cover — go straight to customise
+      build.queue = [build.coverType];
+      build.designs = [];
+      resetDraftToDefaults();
+      renderProgress();
+      goToBuilderStep(2);
+    }
+  }
+}
+
+function switchToBuild() {
+  build.action = 'build';
+  document.getElementById('shopSection').style.display = 'none';
+  if (build.mode === 'fullset') {
+    document.getElementById('fsStep').style.display = '';
+  } else {
+    build.queue = [build.coverType];
+    build.designs = [];
+    resetDraftToDefaults();
+    renderProgress();
+    goToBuilderStep(2);
+  }
+}
+
+function chooseFullsetMode(mode) {
+  build.fullsetMode = mode;
+  document.getElementById('fsCardMatch')?.classList.toggle('active', mode === 'same');
+  document.getElementById('fsCardEach')?.classList.toggle('active', mode === 'each');
+  document.getElementById('buildContinueWrap').style.display = '';
+}
+
+function startCustomising() {
+  if (!build.fullsetMode) { showToast('Please choose matching or customise each'); return; }
+  build.queue = build.fullsetMode === 'same' ? ['Full Set (all matching)'] : [...FULLSET_ORDER];
+  build.designs = [];
+  build.current = 0;
+  resetDraftToDefaults();
+  renderProgress();
+  goToBuilderStep(2);
+}
+
+/* ==================== STEPPER ==================== */
+function goToBuilderStep(n) {
+  document.querySelectorAll('.bstep').forEach(s => s.classList.remove('active'));
+  document.getElementById('bstep' + n)?.classList.add('active');
+  document.querySelectorAll('.step-pill').forEach(p => {
+    const s = parseInt(p.dataset.step, 10);
+    p.classList.toggle('active', s === n);
+    p.classList.toggle('done', s < n);
+  });
+  // Scroll builder header into view
+  document.getElementById('builderPage')?.scrollIntoView({behavior:'smooth'});
+}
+
+/* ==================== PROGRESS ==================== */
+function updateStylePriceGuide(){
+
+  const el = document.getElementById('stylePriceGuide');
+  if(!el) return;
+
+  const cover = build.queue[build.current];
+
+  if(cover.includes('Driver')){
+    el.innerHTML =
+      'Classic R250 • Old Fashioned R280 • Retro Stripe R300 • Pin Stripe R300';
+  }
+
+  else if(
+    cover.includes('Wood') ||
+    cover.includes('5 Wood') ||
+    cover.includes('3 Wood')
+  ){
+    el.innerHTML =
+      'Classic R200 • Old Fashioned R230 • Retro Stripe R250 • Pin Stripe R250';
+  }
+
+  else if(cover.includes('Hybrid')){
+    el.innerHTML =
+      'Classic R150 • Old Fashioned R180 • Retro Stripe R200 • Pin Stripe R200';
+  }
+
+  else{
+    el.innerHTML =
+      'Driver from R250 • Wood from R200 • Hybrid from R150';
+  }
+}
+function renderProgress() {
+  const name  = build.queue[build.current];
+  const total = build.queue.length;
+  const idx   = build.current + 1;
+  const tag   = document.getElementById('currentCoverTag');
+  if (tag) tag.textContent = name;
+  updateStylePriceGuide();
+  const prog = document.getElementById('customiseProgress');
+  if (prog) prog.innerHTML = `Cover <strong>${idx}</strong> of <strong>${total}</strong> — designing <strong>${name}</strong>`;
+  const bar = document.getElementById('progressBar');
+  if (bar) bar.style.width = `${(idx / total) * 100}%`;
+  const pb = document.getElementById('prevCoverBtn');
+  if (pb) pb.disabled = build.current === 0 && build.action !== 'build';
+  const nb = document.getElementById('nextCoverBtn');
+  if (nb) nb.textContent = build.current === total - 1 ? 'Save & Review →' : 'Save & Next →';
+}
+
+/* ==================== COLOUR SWATCH BUILDER ==================== */
+function buildSwatches(containerId, palette, activeHex, onClickFn) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = '';
+  palette.forEach(({hex, name}) => {
+    const sw = document.createElement('div');
+    sw.className = 'swatch' + (hex.toLowerCase() === activeHex.toLowerCase() ? ' active' : '');
+    sw.style.background = hex;
+    if (hex === '#F5F1E8' || hex === '#f1c40f') sw.style.border = '2px solid rgba(255,255,255,.25)';
+    sw.title = name;
+    sw.onclick = () => onClickFn(hex, sw, containerId);
+    container.appendChild(sw);
+  });
+}
+
+function rebuildAllSwatches() {
+  buildSwatches('shellSwatches',   COLOUR_PALETTE,      currentShell,    (c,el,gid)=>{ currentShell=c; markActive(gid,el); applyColorsToActive(); animateCover(); });
+  buildSwatches('trimSwatches',    COLOUR_PALETTE,      currentTrim,     (c,el,gid)=>{ currentTrim=c;  markActive(gid,el); applyColorsToActive(); });
+  buildSwatches('secondarySwatches', COLOUR_PALETTE,   currentSecondary, (c,el,gid)=>{ currentSecondary=c; markActive(gid,el); applyColorsToActive(); });
+  buildSwatches('numberColorSwatches', TEXT_COLOUR_PALETTE, numberColor, (c,el,gid)=>{ numberColor=c; markActive(gid,el); renderLabels(); });
+  buildSwatches('initialsColorSwatches', TEXT_COLOUR_PALETTE, initialsColor, (c,el,gid)=>{ initialsColor=c; markActive(gid,el); renderLabels(); });
+}
+
+function markActive(groupId, activeEl) {
+  const g = document.getElementById(groupId);
+  if (!g) return;
+  g.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+  activeEl.classList.add('active');
+}
+
+/* ==================== DRAFT SAVE / LOAD ==================== */
+const PRICE_TABLE = {
+  Driver: {
+    "Classic": 250,
+    "Old Fashioned": 280,
+    "Retro Stripe": 300,
+    "Pin Stripe": 300
+  },
+
+  "5 Wood": {
+    "Classic": 200,
+    "Old Fashioned": 230,
+    "Retro Stripe": 250,
+    "Pin Stripe": 250
+  },
+
+  "3 Wood": {
+    "Classic": 200,
+    "Old Fashioned": 230,
+    "Retro Stripe": 250,
+    "Pin Stripe": 250
+  },
+
+  Hybrid: {
+    "Classic": 150,
+    "Old Fashioned": 180,
+    "Retro Stripe": 200,
+    "Pin Stripe": 200
+  },
+
+  "Full Set": {
+    "Classic": 750,
+    "Old Fashioned": 870,
+    "Retro Stripe": 950,
+    "Pin Stripe": 950
+  }
+};
+
+function getEmbroideryCost(design){
+  const hasNumber = !!design.number;
+  const hasInitials = !!design.initials;
+
+  if(hasNumber && hasInitials) return 50;
+  if(hasNumber || hasInitials) return 30;
+  return 0;
+}
+
+function getBasePrice(design){
+
+  const type = design.coverType;
+  const style = design.style;
+
+  if(
+    type.includes("Driver")
+  ){
+    return PRICE_TABLE.Driver[style] || 0;
+  }
+
+  if(
+    type.includes("5 Wood")
+  ){
+    return PRICE_TABLE["5 Wood"][style] || 0;
+  }
+
+  if(
+    type.includes("3 Wood")
+  ){
+    return PRICE_TABLE["3 Wood"][style] || 0;
+  }
+
+  if(
+    type.includes("Hybrid")
+  ){
+    return PRICE_TABLE.Hybrid[style] || 0;
+  }
+
+  if(
+    type.includes("Full")
+  ){
+    return PRICE_TABLE["Full Set"][style] || 0;
+  }
+
+  return 0;
+}
+function captureCurrent() {
+  const tempDesign = {
+  coverType: build.queue[build.current],
+  style: currentStyle,
+  number: numberText,
+  initials: initialsText
+};
+
+const basePrice = getBasePrice(tempDesign);
+const embroideryPrice = getEmbroideryCost(tempDesign);
+const totalPrice = basePrice + embroideryPrice;
+  return {
+    coverType: build.queue[build.current],
+    style: currentStyle,
+    shell: currentShell,
+    shellName: nameFromHex(COLOUR_PALETTE, currentShell),
+    trim: currentTrim,
+    trimName: nameFromHex(COLOUR_PALETTE, currentTrim),
+    useSecondary,
+    secondary: currentSecondary,
+    secondaryName: nameFromHex(COLOUR_PALETTE, currentSecondary),
+    number: numberText,
+    numberPos,
+    numberColor,
+    numberColorName: nameFromHex(TEXT_COLOUR_PALETTE, numberColor),
+    initials: initialsText,
+    initialsPos,
+initialsColor,
+initialsColorName: nameFromHex(TEXT_COLOUR_PALETTE, initialsColor),
+
+basePrice,
+embroideryPrice,
+totalPrice,  };
+}
+
+function nameFromHex(palette, hex) {
+  const found = palette.find(p => p.hex.toLowerCase() === hex.toLowerCase());
+  return found ? found.name : hex;
+}
+
+function loadDraftForIndex(i) {
+  const saved = build.designs[i];
+  if (saved) applyDraft(saved); else resetDraftToDefaults();
+  renderProgress();
+}
+
+function applyDraft(d) {
+  // Style
+  document.querySelectorAll('.template-card').forEach(t =>
+    t.classList.toggle('active', t.querySelector('.template-card-name')?.textContent === d.style));
+  currentStyle = d.style;
+  document.getElementById('templateNameDisplay').textContent = d.style;
+  Object.values(STYLE_SVG_ID).forEach(id => { const e = document.getElementById(id); if(e) e.style.display='none'; });
+  const sv = document.getElementById(STYLE_SVG_ID[d.style] || 'svgClassic');
+  if (sv) sv.style.display = '';
+  // Colours
+  currentShell    = d.shell    || '#5A3E2B';
+  currentTrim     = d.trim     || '#B89B5E';
+  currentSecondary= d.secondary|| '#F5F1E8';
+  useSecondary    = !!d.useSecondary;
+  numberColor     = d.numberColor  || '#F5F1E8';
+  initialsColor   = d.initialsColor|| '#F5F1E8';
+  // Secondary stripe visibility
+  const ss = document.getElementById('secondaryStripeSection');
+  if (ss) ss.style.display = STRIPE_STYLES.has(d.style) ? '' : 'none';
+  const tc = document.getElementById('toggleSecondary');
+  if (tc) tc.checked = useSecondary;
+  const secSw = document.getElementById('secondarySwatches');
+  if (secSw) secSw.style.display = useSecondary ? '' : 'none';
+  // Labels
+  numberText  = d.number  || '';
+  numberPos   = d.numberPos   || 'top';
+  initialsText= d.initials|| '';
+  initialsPos = d.initialsPos || 'bottom';
+  // Checkbox states
+  const tn = document.getElementById('toggleNumber');
+  const ti = document.getElementById('toggleInitials');
+  if (tn) tn.checked = !!numberText;
+  if (ti) ti.checked = !!initialsText;
+  document.getElementById('numberOptions').style.display   = numberText   ? 'block' : 'none';
+  document.getElementById('initialsOptions').style.display = initialsText ? 'block' : 'none';
+  setActivePosTab('numberPosTabs',   numberPos);
+  setActivePosTab('initialsPosTabs', initialsPos);
+  setActiveNumberTab(numberText);
+  const inp = document.getElementById('initialsInput');
+  if (inp) inp.value = initialsText;
+  // Apply colours and rebuild swatches
+  rebuildAllSwatches();
+  applyColorsToActive();
+  renderLabels();
+}
+
+function resetDraftToDefaults() {
+  applyDraft({
+    style:'Classic', shell:'#5A3E2B', trim:'#B89B5E',
+    useSecondary:false, secondary:'#F5F1E8',
+    number:'', numberPos:'top', numberColor:'#F5F1E8',
+    initials:'', initialsPos:'bottom', initialsColor:'#F5F1E8',
+  });
+}
+
+/* ==================== CUSTOMISE NAVIGATION ==================== */
+function saveCurrentAndNext() {
+  build.designs[build.current] = captureCurrent();
+
+  if (build.current < build.queue.length - 1) {
+    build.current++;
+
+    loadDraftForIndex(build.current);
+
+    // ✅ NEW: scroll to top smoothly for next club
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+
+  } else {
+    goToBuilderStep(3);
+    renderReview();
+
+    // optional: also scroll to top on review page
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+}
+
+function prevCover() {
+  build.designs[build.current] = captureCurrent();
+  if (build.current > 0) {
+    build.current--;
+    loadDraftForIndex(build.current);
+  } else {
+    // Back to step 1
+    goToBuilderStep(1);
+    const shopSection = document.getElementById('shopSection');
+    const fsStep      = document.getElementById('fsStep');
+    shopSection.style.display     = 'none';
+    fsStep.style.display          = build.mode === 'fullset' ? '' : 'none';
+    document.getElementById('buildContinueWrap').style.display = build.mode === 'fullset' ? '' : 'none';
+  }
+}
+
+/* ==================== STYLE CONTROLS ==================== */
+function applyStyle(name, el) {
+  document.querySelectorAll('.template-card').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  currentStyle = name;
+  document.getElementById('templateNameDisplay').textContent = name;
+  Object.values(STYLE_SVG_ID).forEach(id => { const e = document.getElementById(id); if(e) e.style.display='none'; });
+  const sv = document.getElementById(STYLE_SVG_ID[name]);
+  if (sv) sv.style.display = '';
+  const d = STYLE_DEFAULTS[name];
+  currentShell = d.shell;
+  currentTrim  = d.trim;
+  const ss = document.getElementById('secondaryStripeSection');
+  if (ss) ss.style.display = STRIPE_STYLES.has(name) ? '' : 'none';
+  if (!STRIPE_STYLES.has(name)) { useSecondary = false; }
+  const tc = document.getElementById('toggleSecondary');
+  if (tc) tc.checked = useSecondary;
+  const secSw = document.getElementById('secondarySwatches');
+  if (secSw) secSw.style.display = useSecondary ? '' : 'none';
+  rebuildAllSwatches();
+  applyColorsToActive();
+  renderLabels();
+  animateCover();
+}
+
+function applyColorsToActive() {
+  // Shell
+  ['coverBody','osBody','rsBody','vsBody'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.setAttribute('fill', currentShell);
+  });
+  // Old school diamond pattern
+  const osPat = document.getElementById('osDiamonds');
+  if (osPat) osPat.querySelectorAll('path').forEach(p => p.setAttribute('stroke', currentTrim));
+  // Retro stripe
+  const inner = useSecondary ? currentSecondary : currentTrim;
+  ['rsTopStripe1','rsBottomStripe2'].forEach(id => { const e = document.getElementById(id); if(e) e.setAttribute('fill', currentTrim); });
+  ['rsTopStripe2','rsBottomStripe1'].forEach(id => { const e = document.getElementById(id); if(e) e.setAttribute('fill', inner); });
+  // Pin stripe
+  ['vsStripeL','vsStripeR'].forEach(id => { const e = document.getElementById(id); if(e) e.setAttribute('fill', currentTrim); });
+  ['vsStripeLInner','vsStripeRInner'].forEach(id => {
+    const e = document.getElementById(id);
+    if (e) { e.setAttribute('fill', currentSecondary); e.setAttribute('display', useSecondary ? '' : 'none'); }
+  });
+}
+
+function toggleSecondaryStripe(cb) {
+  useSecondary = cb.checked;
+  const secSw = document.getElementById('secondarySwatches');
+  if (secSw) secSw.style.display = useSecondary ? '' : 'none';
+  applyColorsToActive();
+}
+
+/* ==================== LABELS / PERSONALISATION ==================== */
+/*
+ * Positioning rules:
+ * - If number and initials share the same slot: number sits ABOVE initials, both centered on x=130.
+ * - Gap between them is 28px (number y + 28 = initials y).
+ * - Overlap is fully prevented.
+ */
+function renderLabels() {
+  document.querySelectorAll('.cv-number,.cv-initials').forEach(el => {
+    el.setAttribute('opacity','0');
+    el.setAttribute('x','130');
+  });
+  const prefix = STYLE_PREFIX[currentStyle];
+  if (!prefix) return;
+  const yMap = LABEL_Y[currentStyle];
+  const nEl  = document.getElementById(prefix + 'Number');
+  const iEl  = document.getElementById(prefix + 'Initials');
+  const sameSlot = numberText && initialsText && numberPos === initialsPos;
+
+  if (nEl) {
+    nEl.textContent = numberText;
+    nEl.setAttribute('fill', numberColor);
+    if (numberText) {
+      nEl.setAttribute('x', '130');
+      nEl.setAttribute('y', sameSlot ? (yMap[numberPos] - 14) : yMap[numberPos]);
+      nEl.setAttribute('opacity','1');
+    }
+  }
+  if (iEl) {
+    iEl.textContent = initialsText;
+    iEl.setAttribute('fill', initialsColor);
+    if (initialsText) {
+      iEl.setAttribute('x', '130');
+      iEl.setAttribute('y', sameSlot ? (yMap[initialsPos] + 20) : yMap[initialsPos]);
+      iEl.setAttribute('opacity','1');
+    }
+  }
+}
+
+function setNumber(val, el) {
+  document.querySelectorAll('#numberTabs .config-tab').forEach(t => t.classList.remove('active'));
+  el?.classList.add('active');
+  numberText = val;
+  renderLabels();
+}
+function setNumberPos(pos, el) {
+  document.querySelectorAll('#numberPosTabs .config-tab').forEach(t => t.classList.remove('active'));
+  el?.classList.add('active');
+  numberPos = pos;
+  renderLabels();
+}
+function setInitials(val) {
+  initialsText = (val || '').toUpperCase().slice(0,3);
+  renderLabels();
+}
+function setInitialsPos(pos, el) {
+  document.querySelectorAll('#initialsPosTabs .config-tab').forEach(t => t.classList.remove('active'));
+  el?.classList.add('active');
+  initialsPos = pos;
+  renderLabels();
+}
+function toggleNumberExtra(cb) {
+  document.getElementById('numberOptions').style.display = cb.checked ? 'block' : 'none';
+  if (cb.checked) { if (!numberText) { numberText='1'; setActiveNumberTab('1'); } }
+  else { numberText = ''; }
+  renderLabels();
+}
+function toggleInitialsExtra(cb) {
+  document.getElementById('initialsOptions').style.display = cb.checked ? 'block' : 'none';
+  if (!cb.checked) { initialsText=''; const inp=document.getElementById('initialsInput'); if(inp) inp.value=''; }
+  renderLabels();
+}
+
+function setActivePosTab(gId, pos) {
+  const g = document.getElementById(gId);
+  if (!g) return;
+  g.querySelectorAll('.config-tab').forEach(t =>
+    t.classList.toggle('active', t.textContent.trim().toLowerCase() === pos.toLowerCase()));
+}
+function setActiveNumberTab(val) {
+  const g = document.getElementById('numberTabs');
+  if (!g) return;
+  g.querySelectorAll('.config-tab').forEach(t =>
+    t.classList.toggle('active', t.textContent.trim() === val));
+}
+
+function animateCover() {
+  document.querySelectorAll('.headcover-svg').forEach(svg => {
+    if (svg.style.display !== 'none') {
+      svg.style.transform = 'scale(1.05) rotate(1.5deg)';
+      setTimeout(() => { svg.style.transform=''; }, 350);
+    }
+  });
+}
+
+/* ==================== REVIEW ==================== */
+function renderReview() {
+  const grid = document.getElementById('reviewGrid');
+  if (!grid) return;
+  grid.innerHTML = build.designs.map((d, i) => {
+    const parts = [];
+    if (d.number)  parts.push(`No. ${d.number} (${d.numberPos}, ${d.numberColorName})`);
+    if (d.initials)parts.push(`"${d.initials}" (${d.initialsPos}, ${d.initialsColorName})`);
+    const secSwatch = d.useSecondary ? `<span class="rc-swatch" title="Secondary ${d.secondaryName}" style="background:${d.secondary}"></span>` : '';
+    return `<div class="review-card">
+      <div class="review-card-header">
+        <div>
+          <div class="rc-type">${d.coverType}</div>
+          <div class="rc-style">${d.style}</div>
+        </div>
+      </div>
+      <div class="rc-swatches">
+        <span class="rc-swatch" title="Shell: ${d.shellName}" style="background:${d.shell}"></span>
+        <span class="rc-swatches-label rc-swatch-label">Shell</span>
+        <span class="rc-swatch" title="Trim: ${d.trimName}" style="background:${d.trim}"></span>
+        <span class="rc-swatch-label">Trim</span>
+        ${secSwatch}
+      </div>
+<div class="rc-extras">
+  ${parts.length ? parts.join(' · ') : 'No personalisation'}
+</div>
+
+<div style="
+  margin-top:.7rem;
+  padding-top:.7rem;
+  border-top:1px solid rgba(255,255,255,.08);
+  font-size:.85rem;
+  line-height:1.6;
+">
+  <div>Base Price: <strong>R${d.basePrice}</strong></div>
+
+  ${
+    d.embroideryPrice > 0
+      ? `<div>Embroidery: +R${d.embroideryPrice}</div>`
+      : ''
+  }
+
+  <div style="
+    margin-top:.3rem;
+    color:#B89B5E;
+    font-weight:700;
+  ">
+    Total: R${d.totalPrice}
+  </div>
+</div>      <button class="review-edit-btn" onclick="editCover(${i})">Edit This Cover</button>
+    </div>`;
+  }).join('');
+}
+
+function editCover(i) {
+  build.current = i;
+  loadDraftForIndex(i);
+  goToBuilderStep(2);
+}
+
+function restartBuilder() {
+  if (!confirm('Discard this build and start over?')) return;
+  build.action    = null;
+  build.queue     = [];
+  build.current   = 0;
+  build.designs   = [];
+  build.fullsetMode = null;
+  showHomepage();
+}
+
+/* ==================== DREAM BOX ==================== */
+function toggleDreamBox() {
+  const box = document.getElementById('dreamBox');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+}
+function sendDreamCover() {
+  const text = document.getElementById('dreamText').value.trim();
+  if (!text) { alert('Please describe your idea first!'); return; }
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hi Fusion Golf! I have an idea for a custom head cover:\n\n"${text}"\n\nCould you help me bring this to life?`)}`, '_blank');
+}
+
+/* ==================== CHECKOUT ==================== */
+function checkoutNow() {
+  const name    = document.getElementById('reviewName')?.value.trim();
+  const contact = document.getElementById('reviewContact')?.value.trim();
+  const notes   = document.getElementById('reviewNotes')?.value.trim();
+  if (!name || !contact) { showToast('Please add your name and contact'); return; }
+  let summary = `Hi Fusion Golf! I'd like to place an order:\n\nFrom: ${name}\nContact: ${contact}\n`;
+  if (notes) summary += `Notes: ${notes}\n`;
+  summary += `\n— ORDER —\n`;
+  const kind = build.mode === 'fullset' ? `Full Set (${build.fullsetMode === 'same' ? 'matching' : 'mixed'})` : `${build.designs.length} Cover`;
+  let totalPrice = 0;
+
+  build.designs.forEach(d=>{
+  totalPrice += getDesignPrice(d);
+  });
+summary += `\nEstimated Total: R${totalPrice}\n`;
+  summary += `\n${kind}\n`;
+  build.designs.forEach(d => {
+    summary += `   • ${d.coverType} — ${d.style}, shell: ${d.shellName}, trim: ${d.trimName}`;
+    if (d.useSecondary) summary += `, secondary: ${d.secondaryName}`;
+    if (d.number)  summary += `, number "${d.number}" at ${d.numberPos} (colour: ${d.numberColorName})`;
+    if (d.initials) summary += `, initials "${d.initials}" at ${d.initialsPos} (colour: ${d.initialsColorName})`;
+    summary += `\n`;
+  });
+  summary += `\nPlease confirm and send pricing. Thanks!`;
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(summary)}`, '_blank');
+  showToast('Order sent! ✓');
+}
+
+/* ==================== CART ==================== */
+const CART_KEY = 'fusiongolf_cart_v1';
+function loadCart()  { try { return JSON.parse(localStorage.getItem(CART_KEY)||'[]'); } catch { return []; } }
+function saveCart(c) { localStorage.setItem(CART_KEY, JSON.stringify(c)); }
+function updateCartBadge() {
+  const cart  = loadCart();
+  const total = cart.reduce((s, item) => s + (item.designs?.length || 0), 0);
+  const badge = document.getElementById('cartBadge');
+  if (badge) { badge.textContent = total; badge.style.display = total > 0 ? 'inline-flex' : 'none'; }
+}
+function openCart()  { renderCart(); document.getElementById('cartDrawer')?.classList.add('open'); document.getElementById('cartBackdrop')?.classList.add('open'); document.body.style.overflow = "hidden";}
+function closeCart() { document.getElementById('cartDrawer')?.classList.remove('open'); document.getElementById('cartBackdrop')?.classList.remove('open');  document.body.style.overflow = "";}
+function renderCart() {
+  const body = document.getElementById('cartBody');
+  if (!body) return;
+  const cart = loadCart();
+  let grandTotal = 0;
+  if (!cart.length) {
+    body.innerHTML = '<div class="cart-empty">Your cart is empty.<br><br>Select a cover to start designing.</div>';
+    document.getElementById('cartFooter').style.display = 'none';
+    return;
+  }
+  document.getElementById('cartFooter').style.display = '';
+  body.innerHTML = cart.map((item, idx) => {
+    const title = item.kind === 'fullset'
+      ? `Full Set (${item.fullsetMode === 'same' ? 'matching' : 'mixed'})`
+      : `${item.designs.length} Cover${item.designs.length > 1 ? 's' : ''}`;
+const lines = item.designs.map(d => {
+
+  grandTotal += d.totalPrice || 0;
+
+  return `
+    <div>
+      • <strong>${d.coverType}</strong>
+      — ${d.style}
+
+      ${d.number ? `, no. "${d.number}"` : ''}
+      ${d.initials ? `, "${d.initials}"` : ''}
+
+      <strong style="float:right;">
+        R${d.totalPrice}
+      </strong>
+    </div>
+  `;
+}).join('');
+    return `<div class="cart-item"><div class="cart-item-head"><div class="cart-item-title">${title}</div><button class="cart-item-remove" onclick="removeCartItem(${idx})">✕</button></div><div class="cart-item-detail">${lines}</div></div>`;
+  }).join('') +
+
+`<div style="
+  margin-top:1rem;
+  padding-top:1rem;
+  border-top:1px solid rgba(255,255,255,.12);
+  font-size:1.05rem;
+  font-weight:700;
+  color:#B89B5E;
+">
+  Total: R${grandTotal}
+</div>`;
+}
+function removeCartItem(idx) { const c = loadCart(); c.splice(idx, 1); saveCart(c); updateCartBadge(); renderCart(); }
+function clearCart() { if (!confirm('Empty your cart?')) return; saveCart([]); updateCartBadge(); renderCart(); }
+function addBuildToCart() {
+  const item = {
+    id: 'b_' + Date.now(),
+    kind: build.mode,
+    fullsetMode: build.mode === 'fullset' ? build.fullsetMode : null,
+    designs: build.designs.map(d => ({...d})),
+    addedAt: new Date().toISOString(),
+  };
+  const cart = loadCart();
+  cart.push(item);
+  saveCart(cart);
+  updateCartBadge();
+  showToast('Added to cart ✓');
+  setTimeout(() => openCart(), 300);
+}
+function confirmOrder() {
+  const cart    = loadCart();
+  if (!cart.length) { showToast('Cart is empty'); return; }
+  const name    = document.getElementById('orderName')?.value.trim();
+  const contact = document.getElementById('orderContact')?.value.trim();
+  const notes   = document.getElementById('orderNotes')?.value.trim();
+  if (!name || !contact) { showToast('Please add your name and contact'); return; }
+  let summary = `Hi Fusion Golf! I'd like to place an order:\n\nFrom: ${name}\nContact: ${contact}\n`;
+  if (notes) summary += `Notes: ${notes}\n`;
+  summary += `\n— ORDER —\n`;
+  cart.forEach((item, i) => {
+    const title = item.kind === 'fullset'
+      ? `Full Set (${item.fullsetMode === 'same' ? 'matching' : 'mixed'})`
+      : `${item.designs.length} Cover${item.designs.length > 1 ? 's' : ''}`;
+    summary += `\n${i+1}. ${title}\n`;
+    item.designs.forEach(d => {
+      summary += `   • ${d.coverType} — ${d.style}, shell: ${d.shellName}, trim: ${d.trimName}`;
+      if (d.useSecondary) summary += `, secondary: ${d.secondaryName}`;
+      if (d.number)  summary += `, number "${d.number}" at ${d.numberPos} (${d.numberColorName})`;
+      if (d.initials) summary += `, initials "${d.initials}" at ${d.initialsPos} (${d.initialsColorName})`;
+      summary += `\n`;
+    });
+  });
+  summary += `\nPlease confirm and send pricing. Thanks!`;
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(summary)}`, '_blank');
+  saveCart([]);
+  updateCartBadge();
+  closeCart();
+  showToast('Order sent! ✓');
+}
+
+/* ==================== TOAST ==================== */
+function showToast(msg) {
+  const t = document.getElementById('cartToast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+/* ==================== INIT ==================== */
+setTimeout(updateCartBadge, 100);
+rebuildAllSwatches();
+</script>
+</body>
+</html>
